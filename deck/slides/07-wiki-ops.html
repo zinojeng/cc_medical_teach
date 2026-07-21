@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P07 · Wiki 三層與三操作</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 860px 1fr; column-gap: 90px; }
+  h1.slide-title { margin-top: 26px; font-size: 68px; }
+  .layers { margin-top: 34px; }
+  .layer { border: 1px solid var(--line); background: var(--card); padding: 20px 34px; position: relative; }
+  .layer + .layer { margin-top: 14px; }
+  .layer .tag { font-family: var(--mono); font-size: 18px; letter-spacing: 0.14em; color: var(--muted); }
+  .layer h3 { font-family: var(--serif); font-weight: 900; font-size: 30px; margin-top: 6px; }
+  .layer p { margin-top: 8px; font-size: 21.5px; line-height: 1.6; color: var(--ink-soft); }
+  .layer.wiki { border-left: 6px solid var(--clay); }
+  .layer.wiki h3 { color: var(--clay-deep); }
+  .layer.schema { border-left: 6px solid var(--teal); }
+  .layer.schema h3 { color: var(--teal); }
+  .ops { padding-top: 108px; }
+  .op { padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .op:first-child { border-top: 3px solid var(--ink); }
+  .op h3 { font-family: var(--serif); font-weight: 900; font-size: 30px; display: flex; align-items: baseline; gap: 18px; }
+  .op h3 code { font-family: var(--mono); font-size: 20px; font-weight: 400; color: var(--clay); letter-spacing: 0.1em; }
+  .op p { margin-top: 10px; font-size: 22px; line-height: 1.62; color: var(--ink-soft); }
+  .op p b { color: var(--ink); }
+  .nav-note { margin-top: 28px; font-family: var(--mono); font-size: 19px; line-height: 1.8; color: var(--muted); }
+  .nav-note b { color: var(--ink-soft); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">WIKI 化的 MED-BRAIN</div>
+      <h1 class="slide-title">三層架構 ×<br><span class="clay">三個日常操作</span></h1>
+      <div class="layers">
+        <div class="layer">
+          <div class="tag">LAYER 1 · RAW SOURCES</div>
+          <h3>原始資料——唯讀</h3>
+          <p>講義 PDF、guideline、去識別化病例。LLM 只讀不改，這是你的 source of truth。</p>
+        </div>
+        <div class="layer wiki">
+          <div class="tag">LAYER 2 · THE WIKI</div>
+          <h3>Wiki——LLM 寫，你讀</h3>
+          <p>LLM 生成並維護的 markdown：疾病頁、藥物頁、概念頁、跨來源 synthesis，彼此互連。</p>
+        </div>
+        <div class="layer schema">
+          <div class="tag">LAYER 3 · THE SCHEMA</div>
+          <h3>Schema——就是 CLAUDE.md</h3>
+          <p>告訴 LLM wiki 怎麼組織、ingest 該走什麼流程——讓它成為有紀律的維護者，而非泛用聊天機器人。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ops">
+      <div class="op">
+        <h3>Ingest 消化 <code>丟入新資料時</code></h3>
+        <p>丟入新版 guideline → LLM 讀取、寫摘要頁、<b>更新 10–15 個相關頁面</b>、標記與舊版矛盾之處、記一筆 log。</p>
+      </div>
+      <div class="op">
+        <h3>Query 查詢 <code>提問時</code></h3>
+        <p>好答案不該消失在聊天紀錄——比較表、鑑別分析<b>回存成新頁面</b>，你的每次探索也在複利。</p>
+      </div>
+      <div class="op">
+        <h3>Lint 健檢 <code>定期</code></h3>
+        <p>找出頁面間矛盾、被新文獻推翻的過時 claims、沒有連結的孤兒頁、該建頁卻沒建的概念。</p>
+      </div>
+      <p class="nav-note"><b>index.md</b>＝內容目錄（每次 ingest 更新）· <b>log.md</b>＝時間軸（append-only）<br>百篇來源的規模內，這兩個檔案就夠導航——不需要 RAG 基礎設施。</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>07 / 18</span></div>
+</body>
+</html>

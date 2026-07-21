@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P06 · LLM Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; }
+  h1.slide-title { margin-top: 26px; font-size: 74px; }
+  p.lead { margin-top: 22px; font-size: 27px; max-width: 1500px; }
+  .vs { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .mode { padding: 38px 44px; }
+  .mode.rag { background: var(--paper-warm); border: 1px solid var(--line); }
+  .mode.wiki { background: #262319; }
+  .mode .tag { font-family: var(--mono); font-size: 19px; letter-spacing: 0.16em; }
+  .mode.rag .tag { color: var(--muted); }
+  .mode.wiki .tag { color: #E8B08A; }
+  .mode h2 { font-family: var(--serif); font-weight: 900; font-size: 38px; margin-top: 12px; }
+  .mode.rag h2 { color: var(--ink-soft); }
+  .mode.wiki h2 { color: #F3EFE5; }
+  .mode p { margin-top: 16px; font-size: 23.5px; line-height: 1.68; }
+  .mode.rag p { color: var(--ink-soft); }
+  .mode.wiki p { color: rgba(243,239,229,0.82); }
+  .mode.wiki p b { color: #E8B08A; }
+  .quote { margin-top: 46px; display: flex; justify-content: space-between; align-items: baseline; gap: 60px; border-left: 4px solid var(--clay); padding: 8px 0 8px 30px; }
+  .quote p { font-family: Georgia, serif; font-style: italic; font-size: 27px; color: var(--ink-soft); }
+  .quote p b { color: var(--clay-deep); font-style: normal; font-family: var(--sans); }
+  .quote .attr { font-family: var(--mono); font-size: 19px; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div class="kicker">THE LLM WIKI PATTERN</div>
+    <h1 class="slide-title">不只檢索——讓 AI 幫你<span class="clay">「編譯」知識</span></h1>
+    <p class="lead">大多數人用 AI 讀文件的方式是 RAG；Karpathy 提出的 LLM Wiki 是另一條路——差別在<b>有沒有累積</b>。</p>
+
+    <div class="vs">
+      <div class="mode rag">
+        <div class="tag">RAG · 現況</div>
+        <h2>每次查詢，從頭重拼</h2>
+        <p>上傳檔案 → 查詢時檢索片段 → 生成答案。問一個需要綜合五份文件的問題，AI 每次都要重新找、重新拼。<b>什麼都沒有留下來。</b></p>
+      </div>
+      <div class="mode wiki">
+        <div class="tag">LLM WIKI · 升級</div>
+        <h2>持續維護、會複利的 Wiki</h2>
+        <p>每加入一份資料，LLM 就<b>讀取、萃取、整合</b>進既有的 wiki——更新疾病頁、修訂總結、標記新舊矛盾。知識<b>編譯一次、持續保鮮</b>，交叉引用早就就位。</p>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>「Obsidian 是 IDE，LLM 是工程師，wiki 是程式碼庫。」——<b>你負責選材料、問好問題；摘要、交叉引用、歸檔、簿記，全部是 LLM 的事。</b></p>
+      <span class="attr">Andrej Karpathy · LLM Wiki</span>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>06 / 18</span></div>
+</body>
+</html>
