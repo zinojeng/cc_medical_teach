@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P01 · 封面</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  body { display: flex; flex-direction: column; justify-content: center; padding: 0 150px; }
+  .rule-top { position: absolute; top: 96px; left: 150px; right: 150px; border-top: 3px solid var(--ink); }
+  .issue { position: absolute; top: 116px; left: 150px; right: 150px; display: flex; justify-content: space-between; font-size: 20px; letter-spacing: 0.18em; color: var(--muted); }
+  .kicker { margin-bottom: 44px; }
+  h1 { font-family: var(--serif); font-weight: 900; font-size: 148px; line-height: 1.14; letter-spacing: 0.01em; }
+  h1 .clay { color: var(--clay); }
+  .sub { margin-top: 46px; font-size: 34px; line-height: 1.7; color: var(--ink-soft); max-width: 1300px; }
+  .en { margin-top: 18px; font-family: Georgia, serif; font-style: italic; font-size: 27px; color: var(--muted); }
+  .cover-foot { position: absolute; bottom: 88px; left: 150px; right: 150px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--line); padding-top: 26px; font-size: 20px; color: var(--muted); letter-spacing: 0.06em; }
+  .cover-foot .mono { font-family: var(--mono); font-size: 18px; }
+</style>
+</head>
+<body>
+  <div class="rule-top"></div>
+  <div class="issue"><span>MEDICAL STUDENT EDITION</span><span>2026 · 07</span></div>
+
+  <div class="kicker">AI 工作流 × 醫學教育</div>
+  <h1>把 Claude Code<br>變成你的<span class="clay">第二大腦</span></h1>
+  <p class="sub">從聊天機器人到臨床學習系統——醫學生的 Agent 工作流入門。</p>
+  <p class="en">A Second Brain for Medical Students, powered by Claude Code.</p>
+
+  <div class="cover-foot">
+    <span>改編自「聯發科教育基金會 Claude Code 工作坊」</span>
+    <span class="mono">github.com/zinojeng/cc_medical_teach</span>
+  </div>
+</body>
+</html>

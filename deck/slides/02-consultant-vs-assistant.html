@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P02 · 顧問 vs 助手</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; }
+  h1.slide-title { margin-top: 26px; font-size: 76px; }
+  p.lead { margin-top: 22px; font-size: 27px; max-width: 1500px; }
+  table { margin-top: 44px; width: 100%; border-collapse: collapse; font-size: 25px; line-height: 1.55; }
+  th { font-family: var(--serif); font-weight: 700; text-align: left; padding: 18px 28px; border-bottom: 3px solid var(--ink); font-size: 26px; letter-spacing: 0.04em; }
+  th.consult { color: var(--muted); }
+  th.agent { color: var(--teal); }
+  td { padding: 21px 28px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+  td.scene { font-weight: 700; color: var(--ink); white-space: nowrap; width: 200px; }
+  td.agent-cell { background: var(--teal-soft); color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>01 · 為什麼是 AGENT</span></div>
+
+  <div class="content">
+    <div class="kicker">WHY AN AGENT</div>
+    <h1 class="slide-title">ChatGPT 是顧問，<br>Claude Code 是<span class="teal">會動手的助手</span></h1>
+    <p class="lead">網頁版 AI「他出嘴、你動手」；Agent 能讀你的資料、使用工具、修改檔案、驗證結果。</p>
+
+    <table>
+      <tr><th style="width:200px">場景</th><th class="consult">顧問（網頁版 AI）</th><th class="agent">助手（Claude Code）</th></tr>
+      <tr><td class="scene">讀 paper</td><td>貼上摘要請它總結</td><td class="agent-cell">讀整個資料夾的 PDF，交叉比對後產出結構化文獻表</td></tr>
+      <tr><td class="scene">考前複習</td><td>一問一答</td><td class="agent-cell">掃描整學期筆記，找出你「從沒寫過筆記」的弱點章節</td></tr>
+      <tr><td class="scene">病例學習</td><td>描述病例請它討論</td><td class="agent-cell">讀去識別化 case log，依你的格式產出 SOAP 與鑑別診斷樹</td></tr>
+      <tr><td class="scene">做 Anki</td><td>手動複製貼上</td><td class="agent-cell">從筆記自動生成 cloze 卡片檔，直接匯入</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>為什麼是 Agent</span><span>02 / 16</span></div>
+</body>
+</html>

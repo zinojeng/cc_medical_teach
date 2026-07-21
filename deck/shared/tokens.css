@@ -1,0 +1,76 @@
+/* 把 Claude Code 變成你的第二大腦（醫學生版）— shared design tokens */
+:root {
+  --paper: #F3EFE5;
+  --paper-warm: #ECE6D8;
+  --card: #FBF9F3;
+  --ink: #211F1A;
+  --ink-soft: #45412F;
+  --muted: #8A8371;
+  --clay: #C15F3C;        /* Claude terracotta */
+  --clay-deep: #9A4527;
+  --teal: #2E6E63;        /* medical accent */
+  --teal-soft: #E4EBE6;
+  --alert: #8C2F1F;
+  --line: #DCD4C2;
+  --serif: "Noto Serif TC", "Songti TC", serif;
+  --sans: "Noto Sans TC", "PingFang TC", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  background: var(--paper);
+  background-image: radial-gradient(circle at 30% 20%, rgba(33,33,33,0.015), transparent 60%);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── page chrome ─────────────────────────────── */
+.masthead {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 88px; padding: 0 110px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px; letter-spacing: 0.1em; color: var(--muted);
+}
+.masthead .brand { font-family: var(--serif); font-weight: 700; color: var(--ink-soft); letter-spacing: 0.14em; }
+.masthead .brand b { color: var(--clay); font-weight: 900; }
+
+.page-footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 76px; padding: 0 110px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--line);
+  font-size: 18px; letter-spacing: 0.08em; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.kicker {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 21px; letter-spacing: 0.24em;
+  color: var(--clay); font-weight: 700;
+}
+.kicker::before { content: ""; width: 48px; height: 4px; background: var(--clay); flex: none; }
+
+h1.slide-title {
+  font-family: var(--serif); font-weight: 900;
+  font-size: 84px; line-height: 1.18; letter-spacing: 0.01em;
+  color: var(--ink);
+}
+h1.slide-title .clay { color: var(--clay); }
+h1.slide-title .teal { color: var(--teal); }
+
+p.lead { font-size: 30px; line-height: 1.7; color: var(--ink-soft); }
+.en-sub { font-family: Georgia, "Times New Roman", serif; font-style: italic; color: var(--muted); }
+
+/* ── dark variant ────────────────────────────── */
+body.dark { background: #221F19; color: #F3EFE5; }
+body.dark .masthead, body.dark .page-footer { border-color: rgba(243,239,229,0.16); color: rgba(243,239,229,0.55); }
+body.dark .masthead .brand { color: rgba(243,239,229,0.85); }
+body.dark h1.slide-title { color: #F3EFE5; }

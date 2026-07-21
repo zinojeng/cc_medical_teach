@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P04 · 根據你的資料</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  body.dark { display: flex; flex-direction: column; justify-content: center; padding: 0 170px; }
+  .kicker { color: #E08A62; }
+  .kicker::before { background: #E08A62; }
+  h1 { margin-top: 46px; font-family: var(--serif); font-weight: 900; font-size: 104px; line-height: 1.32; }
+  h1 .hl { color: #E08A62; }
+  .sub { margin-top: 52px; font-size: 32px; line-height: 1.8; color: rgba(243,239,229,0.78); max-width: 1420px; }
+  .sub b { color: #F3EFE5; }
+  .tag { margin-top: 48px; font-family: var(--mono); font-size: 22px; color: rgba(243,239,229,0.5); letter-spacing: 0.06em; }
+</style>
+</head>
+<body class="dark">
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b style="color:#E08A62">第二大腦</b></span><span>01 · 為什麼是 AGENT</span></div>
+
+  <div class="kicker">GROUNDED IN YOUR DATA</div>
+  <h1>Claude Code 根據<span class="hl">「你的資料」</span>回答，<br>而不是憑訓練記憶。</h1>
+  <p class="sub">這對醫學至關重要——每個論斷都能 <b>grep 回你的講義與 guideline 原文</b>驗證，把幻覺風險從「無從查證」變成「一行指令可查」。</p>
+  <p class="tag">$ grep -n "HbA1c" 04_guidelines/ada-2026.md</p>
+
+  <div class="page-footer"><span>為什麼是 Agent</span><span>04 / 16</span></div>
+</body>
+</html>

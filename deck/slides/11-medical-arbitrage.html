@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P11 · 醫療領域的套利機會</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 1fr 900px; column-gap: 100px; }
+  h1.slide-title { margin-top: 26px; font-size: 70px; }
+  p.lead { margin-top: 26px; font-size: 27px; max-width: 640px; }
+  p.src { margin-top: 30px; font-family: var(--mono); font-size: 19px; color: var(--muted); }
+  .chart { padding-top: 130px; }
+  .row { margin-bottom: 52px; }
+  .row .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+  .row .name { font-family: var(--serif); font-weight: 700; font-size: 30px; }
+  .row .val { font-family: var(--mono); font-size: 48px; font-weight: 500; }
+  .row .track { height: 54px; background: var(--paper-warm); border-radius: 6px; overflow: hidden; }
+  .row .fill { height: 100%; border-radius: 6px; }
+  .row.med .val { color: var(--clay-deep); }
+  .row.med .fill { width: 100%; background: var(--clay); }
+  .row.sw .val { color: var(--muted); }
+  .row.sw .fill { width: 8.7%; background: var(--muted); }
+  .why { margin-top: 10px; border-left: 4px solid var(--clay); padding: 8px 0 8px 28px; font-size: 24px; line-height: 1.7; color: var(--ink-soft); }
+  .why b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>05 · SKILL</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">THE ARBITRAGE</div>
+      <h1 class="slide-title">醫療，是 Skill<br>回報<span class="clay">最大</span>的領域</h1>
+      <p class="lead">模型在軟體領域的預訓練已飽和；對在地化醫療流程的覆蓋卻很薄——<b>你寫下的專業判斷，價值極高。</b></p>
+      <p class="src">SkillsBench（arXiv:2602.12670）· 各領域 Skill 提升幅度</p>
+    </div>
+
+    <div class="chart">
+      <div class="row med">
+        <div class="head"><span class="name">醫療保健 Healthcare</span><span class="val">+51.9</span></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+      <div class="row sw">
+        <div class="head"><span class="name">軟體工程 Software</span><span class="val">+4.5</span></div>
+        <div class="track"><div class="fill"></div></div>
+      </div>
+      <p class="why">社群裡 <b>38% 的 Skill 是軟體開發</b>——大家擠在幫助最小的領域。台灣國考格式、你們醫院的 present 慣例，才是模型不會、而你會的東西。</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Skill</span><span>11 / 16</span></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P03 · Harness</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; }
+  h1.slide-title { margin-top: 26px; }
+  p.lead { margin-top: 24px; max-width: 1520px; font-size: 28px; }
+  .steps { margin-top: 60px; display: flex; align-items: stretch; gap: 0; }
+  .step { flex: 1; background: var(--card); border: 1px solid var(--line); padding: 44px 42px 40px; position: relative; }
+  .step + .step { margin-left: 56px; }
+  .step + .step::before { content: "→"; position: absolute; left: -46px; top: 50%; transform: translateY(-50%); font-size: 40px; color: var(--muted); }
+  .step .num { font-family: var(--mono); font-size: 19px; letter-spacing: 0.2em; color: var(--muted); }
+  .step h2 { font-family: var(--serif); font-weight: 900; font-size: 40px; margin-top: 14px; line-height: 1.3; }
+  .step p { margin-top: 16px; font-size: 24px; line-height: 1.65; color: var(--ink-soft); }
+  .step.hero { border-top: 6px solid var(--clay); }
+  .step.hero h2 { color: var(--clay-deep); }
+  .note { margin-top: 54px; border-left: 4px solid var(--teal); padding: 6px 0 6px 30px; font-size: 26px; line-height: 1.7; color: var(--ink-soft); max-width: 1500px; }
+  .note b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>01 · 為什麼是 AGENT</span></div>
+
+  <div class="content">
+    <div class="kicker">FROM PROMPT TO HARNESS</div>
+    <h1 class="slide-title">Agent＝模型＋<span class="clay">Harness</span></h1>
+    <p class="lead">Harness 是模型之外的一切：System Prompt、工具、基礎設施、協調邏輯。三個世代的演進——</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">STAGE 1</div>
+        <h2>Prompt<br>Engineering</h2>
+        <p>怎麼把問題<b>問好</b>。單次對話的技巧。</p>
+      </div>
+      <div class="step">
+        <div class="num">STAGE 2</div>
+        <h2>Context<br>Engineering</h2>
+        <p>提供 AI <b>什麼樣的資訊</b>。餵對資料，答案才對。</p>
+      </div>
+      <div class="step hero">
+        <div class="num">STAGE 3</div>
+        <h2>Harness<br>Engineering</h2>
+        <p>建構 AI 在<b>什麼樣的環境</b>運作——環境約束＋回饋循環＋可驗證的標準。</p>
+      </div>
+    </div>
+
+    <p class="note">模型本身不是 Agent。當 Harness 為它提供<b>狀態、工具執行、回饋迴圈、可強制執行的限制</b>時，才成為 Agent——Claude Code 就是這樣一套 Harness。</p>
+  </div>
+
+  <div class="page-footer"><span>為什麼是 Agent</span><span>03 / 16</span></div>
+</body>
+</html>

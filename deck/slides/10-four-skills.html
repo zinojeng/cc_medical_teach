@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P10 · 四個必備 Skill</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; }
+  h1.slide-title { margin-top: 26px; font-size: 72px; }
+  .grid { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .skill { background: var(--card); border: 1px solid var(--line); padding: 36px 42px; display: flex; flex-direction: column; }
+  .skill code.name { font-family: var(--mono); font-size: 26px; font-weight: 500; color: var(--clay-deep); }
+  .skill h2 { font-family: var(--serif); font-weight: 900; font-size: 34px; margin-top: 12px; }
+  .skill p { margin-top: 12px; font-size: 22px; line-height: 1.62; color: var(--ink-soft); }
+  .skill .guard { margin-top: auto; padding-top: 16px; font-size: 20px; color: var(--teal); }
+  .skill.first { border-top: 5px solid var(--clay); position: relative; }
+  .skill.first .badge { position: absolute; top: -16px; right: 28px; background: var(--clay); color: #FBF9F3; font-size: 18px; letter-spacing: 0.1em; padding: 5px 16px; border-radius: 999px; }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>05 · SKILL</span></div>
+
+  <div class="content">
+    <div class="kicker">STARTER PACK</div>
+    <h1 class="slide-title">醫學生的<span class="clay">四個必備 Skill</span></h1>
+
+    <div class="grid">
+      <div class="skill first">
+        <span class="badge">從這個開始</span>
+        <code class="name">anki-gen</code>
+        <h2>記憶卡片生成</h2>
+        <p>從指定筆記生成 cloze 卡片 TSV 檔。只從筆記取材、不憑空補充；劑量與 cutoff 等數值知識優先。</p>
+        <p class="guard">✓ 最小、最具體——第一個 Skill 的理想起點</p>
+      </div>
+      <div class="skill">
+        <code class="name">case-writeup</code>
+        <h2>病例整理</h2>
+        <p>草稿 → 標準 SOAP＋三層鑑別診斷（最可能／can't-miss／少見），對照 guideline 標差異，列 learning issues。</p>
+        <p class="guard">✓ 內建去識別化檢查，有疑慮就停下</p>
+      </div>
+      <div class="skill">
+        <code class="name">journal-club</code>
+        <h2>文獻評讀</h2>
+        <p>PICO、設計、效應量與 95% CI 逐字對照原文；RCT 套 CONSORT、觀察型套 STROBE；產出 30 秒口頭報告版。</p>
+        <p class="guard">✓ 嚴分「論文說的」與「推論」，推論標 ⚠️</p>
+      </div>
+      <div class="skill">
+        <code class="name">weak-spot-scan</code>
+        <h2>考前弱點掃描</h2>
+        <p>比對考古題範圍與筆記覆蓋度，找出「考過但筆記空白」與「反覆錯」的主題，產出 7 天加權複習排程。</p>
+        <p class="guard">✓ 把「未知的未知」變成複習清單</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Skill</span><span>10 / 16</span></div>
+</body>
+</html>

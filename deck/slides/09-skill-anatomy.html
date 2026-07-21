@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P09 · Skill 解剖</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 1fr 860px; column-gap: 90px; }
+  h1.slide-title { margin-top: 26px; font-size: 74px; }
+  p.lead { margin-top: 24px; font-size: 27px; }
+  .principles { margin-top: 44px; }
+  .pr { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .pr:first-child { border-top: 3px solid var(--ink); }
+  .pr h3 { font-family: var(--serif); font-weight: 700; font-size: 28px; }
+  .pr h3 .n { font-family: var(--mono); font-size: 20px; color: var(--clay); margin-right: 14px; }
+  .pr p { margin-top: 8px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
+  .skillfile { background: #262319; border-radius: 10px; padding: 40px 46px; font-family: var(--mono); font-size: 22px; line-height: 1.8; color: #E9E4D4; position: relative; }
+  .skillfile .fname { font-size: 18px; color: rgba(233,228,212,0.5); border-bottom: 1px solid rgba(233,228,212,0.18); padding-bottom: 14px; margin-bottom: 20px; }
+  .skillfile .fm { color: #E8B08A; }
+  .skillfile .cmt { color: rgba(233,228,212,0.45); }
+  .label { position: absolute; right: -0px; transform: translateX(calc(100% + 24px)); background: var(--card); border: 1px solid var(--line); padding: 10px 18px; font-family: var(--sans); font-size: 19px; color: var(--ink-soft); white-space: nowrap; }
+  .callout-a, .callout-b { margin-top: 26px; display: flex; gap: 18px; align-items: center; font-size: 22px; color: var(--ink-soft); }
+  .chip { flex: none; font-family: var(--mono); font-size: 18px; padding: 6px 14px; border-radius: 999px; }
+  .chip.a { background: rgba(232,176,138,0.25); color: var(--clay-deep); border: 1px solid var(--clay); }
+  .chip.b { background: var(--teal-soft); color: var(--teal); border: 1px solid var(--teal); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>05 · SKILL</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">SKILL = 固定下來的流程</div>
+      <h1 class="slide-title">SKILL.md：<br>把重複任務<span class="clay">寫成規格</span></h1>
+      <p class="lead">每週都在做的事，就不該每週重新解釋一次。</p>
+      <div class="principles">
+        <div class="pr"><h3><span class="n">01</span>一個 Skill 只做一件小事</h3><p>刪掉太大的想法，縮小成一個具體任務——「病例整理」而不是「幫我學醫」。</p></div>
+        <div class="pr"><h3><span class="n">02</span>太多 Skill 反而混亂</h3><p>Claude 會不知道何時該用哪個。研究實證：聚焦的 2–3 檔案 Skill 勝過百科全書式。</p></div>
+        <div class="pr"><h3><span class="n">03</span>自己寫，不要讓模型代寫</h3><p>SkillsBench：專家策劃的 Skill 大幅提升通過率；模型自產的比沒有還差。</p></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skillfile">
+        <div class="fname">.claude/skills/case-writeup/SKILL.md</div>
+        <div class="fm">---</div>
+        <div class="fm">name: case-writeup</div>
+        <div class="fm">description: 把病例草稿整理成標準</div>
+        <div class="fm">&nbsp;&nbsp;SOAP＋學習議題。當使用者指向</div>
+        <div class="fm">&nbsp;&nbsp;02_cases/ 的草稿檔時使用。</div>
+        <div class="fm">---</div>
+        <div>1. 先確認已去識別化，有疑慮就停下</div>
+        <div>2. 整理成 SOAP，鑑別診斷分三層</div>
+        <div>3. 對照 04_guidelines/ 標出處置差異</div>
+        <div>4. 列 3 個 learning issues（附 PICO）</div>
+      </div>
+      <div class="callout-a"><span class="chip a">frontmatter</span><span>告訴 Claude <b>「何時」</b>使用這個 Skill</span></div>
+      <div class="callout-b"><span class="chip b">內容</span><span>告訴 Claude 使用時要<b>「遵守什麼」</b></span></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Skill</span><span>09 / 16</span></div>
+</body>
+</html>

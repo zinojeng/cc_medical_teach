@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P12 · 了解你的未知</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 620px 1fr; column-gap: 90px; }
+  h1.slide-title { margin-top: 26px; font-size: 72px; }
+  p.lead { margin-top: 26px; font-size: 26px; line-height: 1.75; }
+  .quad { padding-top: 110px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 26px; height: 780px; }
+  .q { background: var(--card); border: 1px solid var(--line); padding: 34px 38px; }
+  .q .tag { font-family: var(--mono); font-size: 18px; letter-spacing: 0.12em; color: var(--muted); }
+  .q h2 { font-family: var(--serif); font-weight: 900; font-size: 33px; margin-top: 10px; }
+  .q p { margin-top: 12px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
+  .q.uu { background: #262319; border-color: #262319; }
+  .q.uu .tag { color: rgba(233,228,212,0.5); }
+  .q.uu h2 { color: #E8B08A; }
+  .q.uu p { color: rgba(233,228,212,0.8); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>06 · 臨床後設認知</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">KNOW YOUR UNKNOWNS</div>
+      <h1 class="slide-title">了解<br>你的<span class="clay">未知</span></h1>
+      <p class="lead">這個框架其實就是臨床推理的後設認知——與 AI 協作的核心技能，是<b>減少並為你的未知做規劃</b>。查房前先問自己：我在哪一格？</p>
+    </div>
+
+    <div class="quad">
+      <div class="q">
+        <div class="tag">KNOWN · KNOWNS</div>
+        <h2>已知的已知</h2>
+        <p>你寫得出來的——這個病人的 problem list。直接寫進 prompt。</p>
+      </div>
+      <div class="q">
+        <div class="tag">KNOWN · UNKNOWNS</div>
+        <h2>已知的未知</h2>
+        <p>你知道要查的——「hyponatremia 的 workup 我還不熟」。直接問。</p>
+      </div>
+      <div class="q">
+        <div class="tag">UNKNOWN · KNOWNS</div>
+        <h2>未知的已知</h2>
+        <p>你的品味——好病歷看得出、說不出。給 AI 一份學長姐的優秀範本當參考。</p>
+      </div>
+      <div class="q uu">
+        <div class="tag">UNKNOWN · UNKNOWNS</div>
+        <h2>未知的未知</h2>
+        <p>主治會電你的地方。請 AI 做「盲點掃描」，把它變成前一格。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>臨床後設認知</span><span>12 / 16</span></div>
+</body>
+</html>

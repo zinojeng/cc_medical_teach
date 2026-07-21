@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P06 · CLAUDE.md</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 1fr 820px; column-gap: 90px; }
+  h1.slide-title { margin-top: 26px; font-size: 74px; }
+  p.lead { margin-top: 24px; font-size: 27px; }
+  .points { margin-top: 48px; }
+  .pt { display: flex; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .pt:first-child { border-top: 3px solid var(--ink); }
+  .pt .bullet { color: var(--clay); font-size: 26px; padding-top: 3px; }
+  .pt h3 { font-family: var(--serif); font-weight: 700; font-size: 28px; }
+  .pt p { margin-top: 6px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
+  .doc { background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 14px 40px rgba(33,31,26,0.08); padding: 42px 48px; font-size: 21.5px; line-height: 1.72; }
+  .doc .fname { font-family: var(--mono); font-size: 19px; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 22px; }
+  .doc h4 { font-family: var(--mono); font-size: 21px; color: var(--clay-deep); margin-top: 20px; }
+  .doc h4:first-of-type { margin-top: 0; }
+  .doc p { color: var(--ink-soft); margin-top: 4px; }
+  .doc .rule { color: var(--alert); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">THE MANUAL</div>
+      <h1 class="slide-title">CLAUDE.md<br>——給 AI 的<span class="clay">說明書</span></h1>
+      <p class="lead">沒有說明書，AI 只能猜你的偏好和規則。</p>
+      <div class="points">
+        <div class="pt"><span class="bullet">●</span><div><h3>LLM 是無狀態的</h3><p>它不會記得上次對話——把你的習慣寫成檔案，才能每次都遵守。</p></div></div>
+        <div class="pt"><span class="bullet">●</span><div><h3>/init 起手，手動精修</h3><p>先讓它依資料夾結構生成草稿，再補上你的格式偏好與安全紅線。</p></div></div>
+        <div class="pt"><span class="bullet">●</span><div><h3>沉澱的是你的專業</h3><p>SOAP 結構、三層鑑別、劑量必附來源——這些標準就是你的臨床判斷。</p></div></div>
+      </div>
+    </div>
+
+    <div class="doc">
+      <div class="fname">med-brain/CLAUDE.md</div>
+      <h4>## 我是誰</h4>
+      <p>醫學系六年級（clerk），內科實習中。術語中英並用，英文術語不翻譯。</p>
+      <h4>## 資料夾規則</h4>
+      <p>01_courses/ 唯讀；02_cases/ 一律已去識別化；產出物放 06_output/。</p>
+      <h4>## 輸出格式偏好</h4>
+      <p>病例討論用 SOAP；鑑別診斷分「最可能／can't-miss／少見」三層；藥物劑量必附 guideline 來源與年份。</p>
+      <h4>## 安全紅線</h4>
+      <p><span class="rule">絕不生成可直接用於真實病人的醫囑。</span>每個論斷標註出處檔案；不確定的一律標「⚠️ 需查證」。</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>06 / 16</span></div>
+</body>
+</html>

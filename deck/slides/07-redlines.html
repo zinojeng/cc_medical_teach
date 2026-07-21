@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P07 · 安全紅線</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; }
+  .kicker { color: var(--alert); } .kicker::before { background: var(--alert); }
+  h1.slide-title { margin-top: 26px; }
+  h1 .red { color: var(--alert); }
+  .grid { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .rule { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--alert); padding: 38px 42px; }
+  .rule .no { font-family: var(--mono); font-size: 20px; letter-spacing: 0.18em; color: var(--alert); }
+  .rule h2 { font-family: var(--serif); font-weight: 900; font-size: 36px; margin-top: 14px; }
+  .rule p { margin-top: 14px; font-size: 23px; line-height: 1.65; color: var(--ink-soft); }
+  .rule p b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>03 · 安全紅線</span></div>
+
+  <div class="content">
+    <div class="kicker">NON-NEGOTIABLE</div>
+    <h1 class="slide-title">醫學情境的<span class="red">四條安全紅線</span></h1>
+
+    <div class="grid">
+      <div class="rule">
+        <div class="no">RED LINE 1</div>
+        <h2>PHI 絕不入庫</h2>
+        <p>病例進資料夾前必須<b>去識別化</b>：姓名、病歷號、床號、精確日期、可辨識的罕見組合。這不是 AI 問題，是<b>個資法與醫療法</b>問題。</p>
+      </div>
+      <div class="rule">
+        <div class="no">RED LINE 2</div>
+        <h2>AI 輸出不是醫療決策</h2>
+        <p>所有產出<b>僅供學習</b>。用於真實病人前，必須回到原始 guideline 與上級醫師。</p>
+      </div>
+      <div class="rule">
+        <div class="no">RED LINE 3</div>
+        <h2>可驗證性優先</h2>
+        <p>要求每個論斷附出處 <b>[檔名 p.X]</b>，可以 grep 驗證。無出處的內容一律視為<b>未驗證</b>。</p>
+      </div>
+      <div class="rule">
+        <div class="no">RED LINE 4</div>
+        <h2>Skill 要做對照測試</h2>
+        <p>同一批考古題「有 Skill vs 無 Skill」各跑一次比較正確率——研究顯示 <b>16/84 的任務載入 Skill 反而變差</b>，醫學內容尤其要驗。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>安全紅線</span><span>07 / 16</span></div>
+</body>
+</html>

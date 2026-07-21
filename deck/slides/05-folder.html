@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P05 · 資料夾架構</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 760px 1fr; column-gap: 90px; }
+  .left .kicker { margin-bottom: 26px; }
+  h1.slide-title { font-size: 72px; }
+  .tree { margin-top: 44px; background: #262319; color: #E9E4D4; border-radius: 10px; padding: 40px 44px; font-family: var(--mono); font-size: 23px; line-height: 1.85; }
+  .tree .dir { color: #E8B08A; }
+  .tree .dim { color: rgba(233,228,212,0.45); }
+  .anno { padding-top: 118px; }
+  .anno-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .anno-item:first-child { border-top: 3px solid var(--ink); }
+  .anno-item .no { font-family: var(--mono); font-size: 21px; color: var(--clay); padding-top: 5px; white-space: nowrap; }
+  .anno-item h3 { font-family: var(--serif); font-weight: 700; font-size: 28px; }
+  .anno-item p { margin-top: 8px; font-size: 22px; line-height: 1.6; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div class="left">
+      <div class="kicker">THE VAULT</div>
+      <h1 class="slide-title">med-brain：<br>第二大腦的<span class="clay">地基</span></h1>
+      <div class="tree">
+<div>med-brain/</div>
+<div>├── <span class="dir">CLAUDE.md</span>        <span class="dim"># 給 AI 的說明書</span></div>
+<div>├── 01_courses/       <span class="dim"># 講義與筆記</span></div>
+<div>├── 02_cases/         <span class="dim"># 去識別化病例</span></div>
+<div>├── 03_papers/        <span class="dim"># 文獻 PDF</span></div>
+<div>├── 04_guidelines/    <span class="dim"># ADA、ESC…</span></div>
+<div>├── 05_exam/          <span class="dim"># 考古題、錯題本</span></div>
+<div>├── 06_output/        <span class="dim"># AI 產出物</span></div>
+<div>└── .claude/<span class="dir">skills/</span>  <span class="dim"># 你的 Skill 們</span></div>
+      </div>
+    </div>
+
+    <div class="anno">
+      <div class="anno-item"><span class="no">RULE 1</span><div><h3>在哪啟動，就在哪工作</h3><p>Claude Code 只動這個資料夾——你的第二大腦有明確的邊界。</p></div></div>
+      <div class="anno-item"><span class="no">RULE 2</span><div><h3>資料夾規則不是收納術</h3><p>是告訴 AI 每份資料扮演什麼角色：講義唯讀、病例先去識別化、產出物集中管理。</p></div></div>
+      <div class="anno-item"><span class="no">RULE 3</span><div><h3>用 Git 保護知識庫</h3><p>不用懂指令——「出張嘴」叫 Claude Code 幫你 git init、commit，每一步都可回溯。</p></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>05 / 16</span></div>
+</body>
+</html>

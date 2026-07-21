@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P08 · Context 管理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 1fr 780px; column-gap: 100px; }
+  h1.slide-title { margin-top: 26px; font-size: 74px; }
+  p.lead { margin-top: 22px; font-size: 27px; }
+  .gauge { margin-top: 46px; }
+  .gauge .bar { height: 46px; border-radius: 8px; background: linear-gradient(to right, var(--teal) 0 40%, #C99A3C 40% 60%, var(--alert) 60% 100%); position: relative; opacity: 0.9; }
+  .gauge .marker { position: absolute; top: -14px; bottom: -14px; left: 40%; width: 3px; background: var(--ink); }
+  .gauge .cap { position: relative; height: 30px; margin-top: 16px; font-family: var(--mono); font-size: 20px; color: var(--muted); }
+  .gauge .cap span { position: absolute; transform: translateX(-50%); }
+  .gauge .cap span:first-child { transform: none; }
+  .gauge .cap span:last-child { transform: none; right: 0; }
+  .gauge .note { margin-top: 22px; font-size: 24px; line-height: 1.65; color: var(--ink-soft); }
+  .gauge .note b { color: var(--alert); }
+  .cmds { padding-top: 116px; }
+  .cmd { display: flex; gap: 30px; align-items: baseline; padding: 23px 0; border-bottom: 1px solid var(--line); }
+  .cmd:first-child { border-top: 3px solid var(--ink); }
+  .cmd code { font-family: var(--mono); font-size: 27px; color: var(--clay-deep); font-weight: 500; width: 210px; flex: none; }
+  .cmd p { font-size: 23px; line-height: 1.6; color: var(--ink-soft); }
+  .subagent { margin-top: 34px; background: var(--teal-soft); border-left: 4px solid var(--teal); padding: 24px 30px; font-size: 23px; line-height: 1.65; color: var(--ink-soft); }
+  .subagent b { color: var(--teal); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>04 · CONTEXT 管理</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">CONTEXT IS FINITE</div>
+      <h1 class="slide-title">Context<br><span class="clay">不是無限的</span></h1>
+      <p class="lead">AI 的工作記憶有限——用到約一半就開始混亂。</p>
+      <div class="gauge">
+        <div class="bar"><div class="marker"></div></div>
+        <div class="cap"><span>0%</span><span style="left:40%">40%</span><span style="left:60%">60%</span><span>100%</span></div>
+        <p class="note">用量到 <b>40–60%</b> 就開始錯亂：把 A 病例的數據混進 B 病例、忘記你的格式偏好。<br>對策：一次餵 20 篇 PDF 不如交給 subagent 分頭讀。</p>
+      </div>
+    </div>
+
+    <div class="cmds">
+      <div class="cmd"><code>/context</code><p>檢查目前用量——知道它正在看什麼，才知道它為何答得好或不好</p></div>
+      <div class="cmd"><code>/init</code><p>依資料夾結構生成 CLAUDE.md 草稿</p></div>
+      <div class="cmd"><code>/clear</code><p>換任務、對話太長、開始混亂——重新開始</p></div>
+      <div class="cmd"><code>/rewind</code><p>狀況不對，回到上一步</p></div>
+      <div class="subagent"><b>Subagent</b>：每篇 paper 派一個分身各自閱讀（獨立 context），主對話只彙整結論——代價是 token 較貴。</div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Context 管理</span><span>08 / 16</span></div>
+</body>
+</html>

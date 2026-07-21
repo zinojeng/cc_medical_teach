@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P14 · 第一週路線圖</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 560px 1fr; column-gap: 90px; }
+  h1.slide-title { margin-top: 26px; font-size: 74px; }
+  p.lead { margin-top: 26px; font-size: 26px; line-height: 1.75; }
+  .days { padding-top: 30px; }
+  .day { display: flex; gap: 30px; align-items: baseline; padding: 17.5px 0; border-bottom: 1px solid var(--line); }
+  .day:first-child { border-top: 3px solid var(--ink); }
+  .day .d { font-family: var(--mono); font-size: 21px; color: var(--clay); width: 90px; flex: none; }
+  .day h3 { font-size: 25px; font-weight: 700; width: 340px; flex: none; }
+  .day p { font-size: 21px; color: var(--ink-soft); line-height: 1.5; }
+  .day.hero h3 { color: var(--clay-deep); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>07 · 上手</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">WEEK ONE</div>
+      <h1 class="slide-title">第一週<br><span class="clay">上手路線圖</span></h1>
+      <p class="lead">每天 30 分鐘，一週後你就有一個最小可用的第二大腦。<b>第二大腦是使用中長大的</b>——不會一次完成，要定期檢視與調整。</p>
+    </div>
+
+    <div class="days">
+      <div class="day"><span class="d">Day 1</span><h3>安裝與建庫</h3><p>Claude Code＋VS Code，建立 med-brain 資料夾</p></div>
+      <div class="day"><span class="d">Day 2</span><h3>寫說明書</h3><p>丟入一科講義，/init，手寫偏好與安全紅線</p></div>
+      <div class="day"><span class="d">Day 3</span><h3>練手感</h3><p>@ 一份講義請它解釋、出 5 題考你</p></div>
+      <div class="day hero"><span class="d">Day 4</span><h3>第一個 Skill</h3><p>從 anki-gen 開始——最小、最具體</p></div>
+      <div class="day"><span class="d">Day 5</span><h3>文獻評讀</h3><p>用 journal-club Skill 評讀下週 meeting 的 paper</p></div>
+      <div class="day"><span class="d">Day 6</span><h3>保護知識庫</h3><p>請 Claude Code git init，教你看 git status</p></div>
+      <div class="day"><span class="d">Day 7</span><h3>回顧與固定</h3><p>寫下「下週要固定跑的一個流程」</p></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>上手</span><span>14 / 16</span></div>
+</body>
+</html>
