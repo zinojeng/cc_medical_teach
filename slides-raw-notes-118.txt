@@ -1,0 +1,599 @@
+=== Slide 1 (id=p1) ===
+今天不是只學會 Claude Code，而是建立一個跟 AI 一起成長的系統與 mindset。
+irm https://gist.githubusercontent.com/oberonlai/61ef05497999adc560600fceaabfe2b8/raw/install-claude-code-windows.ps1 | iex
+
+=== Slide 2 (id=g3ef020b959b_0_30) ===
+大家好，今天這場工作坊，我想帶大家看的不是一個新的 AI 工具，而是一種新的工作方式。
+很多老師其實已經會用 ChatGPT、Gemini 或 Claude App。我們可能會請 AI 幫忙寫教案、出題目、摘要文章、整理資料，這些都很好。但我慢慢發現，如果我們每次都只是重新打開 AI、重新說明背景、重新貼資料、重新修改格式，那 AI 雖然幫我們省了一點時間，卻還沒有真正改變我們的工作流。
+所以今天我想討論的是：能不能把老師平常腦中那些很珍貴、但很難說清楚的專業判斷，整理成一套可以重複運作的 AI 工作流？
+例如當我們設計一份教案時，其實不只是輸入主題，然後叫 AI 產生內容。真正重要的是：我要先看課綱、判斷學生的先備知識、決定學習目標、設計評量、設計教學活動，再用我習慣的格式產出教案。這一整套流程，才是老師真正的專業。
+Claude Code 對很多老師來說，第一眼可能很可怕，因為它是在終端機裡面操作，不像網頁版 AI 那麼直覺。但我選擇用它，不是因為我想把大家變成工程師，而是因為它可以幫我們更清楚地看見 Agent 的本質：AI 不只是回答問題，而是可以讀取資料、使用工具、修改檔案、檢查結果，甚至把一套流程反覆執行。
+今天我們不會追求一次學會所有指令，也不會要求大家完全理解每個技術細節。我們會用剛剛好的實作，讓大家每 10 分鐘左右就有一個小成功：先看懂 Agent 跟一般 AI 的差別，再理解 CLAUDE.md 怎麼讓 AI 記住你的工作習慣，接著用 Skill 把一個重複任務固定下來，最後再看見 subagent、loop 這些功能如何組合成更完整的工作流。
+這場工作坊最後最重要的成果，不是大家記住多少 Claude Code 的功能，而是你能不能開始想像：我自己的教學工作裡，有哪一件事情可以變成工作流？
+也許是自動生成教案，也許是整理資料夾裡的文件，也許是每天早上摘要信件，也許是根據 rubric 初步批改作業。這些任務背後真正重要的，不是 AI 幫你做事，而是你把自己的專業、標準和品味，慢慢沉澱成一套可以被 AI 協助執行的流程。
+所以今天的目標是：不是學會一個工具，而是開始打造屬於自己的 AI 工作流。
+​
+
+=== Slide 3 (id=p2) ===
+如果一開始就建立第二大腦系統，會不知道那些資料夾、CLAUDE.md、Skill 到底如何運作與連接，所以要透過實作逐步理解系統架構。
+​
+而且很少工作坊會提供這麼多的助教，佩琪也事先跟我們討論好幾次，讓我們可以一起把這個工作坊辦好
+
+=== Slide 4 (id=g3f01ee84e5e_2_14) ===
+
+
+=== Slide 5 (id=g3f2aa7eacd6_0_4) ===
+這是Agent嗎？
+
+=== Slide 6 (id=g3ef020b959b_0_12) ===
+
+
+=== Slide 7 (id=p3) ===
+Harness指的是除了模型之外的一切，包含System Prompt、Tools、基礎設施、協調邏輯及中間層等。
+模型本身不是agent，但當Harness為其提供狀態、工具執行、回饋迴圈、跟可以強制執行的限制的時候，才是Agent
+根據 簡光正  的文章，Harness 就是「讓AI從只會說話，變成真的能幫人幹活」的那一整套裝備與工作系統。
+像是Claude Code、Cowork跟龍蝦都算是harness
+就我而言 Harness Engineering比較像是圍繞著Agent建立環境約束與回饋循環，設定好可驗證的標準。用過去軟體工程的驗證機制包住大語言模型的缸中之腦以降低隨機性
+從Prompt Engineering->Context Engineering->Harness Engineering
+當走到 Harness Engineering，Prompt Engineering還重要嗎？
+HarnessEngineering 並非憑空而生，而是Prompt Engineering跟Context Engineering的延伸。
+Prompt Engineering 是怎麼把問題問好
+Context Engineering 是提供AI什麼樣的資訊
+Harness Engineering 是建構AI在什麼樣的環境運作
+​
+
+=== Slide 8 (id=g3ef020b959b_0_59) ===
+網頁版的AI比較像顧問，他出嘴你動手，Agent比較像助手可以完成你交辦的是情
+
+=== Slide 9 (id=g3ef020b959b_1_3) ===
+Claude會根據我的資料回答問題，而不是網路或訓練的資料
+
+=== Slide 10 (id=g3f2a87223b3_0_24) ===
+
+
+=== Slide 11 (id=g3f2a87223b3_0_50) ===
+
+
+=== Slide 12 (id=g3f2a87223b3_0_36) ===
+
+
+=== Slide 13 (id=g3f2a87223b3_0_66) ===
+
+
+=== Slide 14 (id=g3ef020b959b_0_0) ===
+網頁版 Claude 只能一問一答，無法主動改變資料。Claude Code 比較像你的同事，可以瀏覽資料夾、依需求建立檔案，甚至憑空寫出一個 App。
+​
+講者重點：聊天 AI 像臨時顧問；Claude Code 走到你旁邊，能看資料夾、讀規則、建立／修改檔案、連接更多 App。
+學員動作：說出自己過去用聊天 AI 最常卡住的地方。
+
+=== Slide 15 (id=g3f2a87223b3_0_73) ===
+
+
+=== Slide 16 (id=p4) ===
+對知識工作者來說，Claude Code 的價值不只是寫程式，而是處理結構化文字工作。
+​
+學員動作：理解它可以處理文章、教案、摘要、會議記錄、簡報腳本、專案資料。
+
+=== Slide 17 (id=g3ef020b959b_0_81) ===
+對知識工作者來說，Claude Code 的價值不只是寫程式，而是處理結構化文字工作。
+​
+學員動作：理解它可以處理文章、教案、摘要、會議記錄、簡報腳本、專案資料。
+
+=== Slide 18 (id=g3ef020b959b_0_88) ===
+對知識工作者來說，Claude Code 的價值不只是寫程式，而是處理結構化文字工作。
+​
+學員動作：理解它可以處理文章、教案、摘要、會議記錄、簡報腳本、專案資料。
+
+=== Slide 19 (id=g3ef020b959b_0_95) ===
+對知識工作者來說，Claude Code 的價值不只是寫程式，而是處理結構化文字工作。
+​
+學員動作：理解它可以處理文章、教案、摘要、會議記錄、簡報腳本、專案資料。
+​
+跟助教討論
+
+=== Slide 20 (id=g3f2aa7eacd6_0_11) ===
+
+
+=== Slide 21 (id=p5) ===
+安裝是最難的第一步，過程中可能遇到各種問題，請隨時舉手請人幫忙。
+​
+最近還有詐騙網站，請小心
+
+=== Slide 22 (id=p9) ===
+Claude Code 最好和 IDE 一起使用，可以直接點選與編輯檔案。
+​
+講者重點：它不是孤立聊天室，最好和檔案視窗一起用，看得到檔案怎麼變更。後面會交怎麼看變動
+學員動作：調整自己的工作畫面。
+
+=== Slide 23 (id=g3f803dc4478_0_92) ===
+
+
+=== Slide 24 (id=g3f803dc4478_0_0) ===
+
+
+=== Slide 25 (id=p8) ===
+你在哪個資料夾啟動 Claude Code，它就在哪個資料夾內工作，不會跑到其他資料夾（希望啦！）。
+​
+學員動作：進入範例 repo，啟動 Claude Code。
+
+=== Slide 26 (id=g3f803dc4478_0_25) ===
+
+
+=== Slide 27 (id=g3ef020b959b_0_67) ===
+
+
+=== Slide 28 (id=g3ef020b959b_0_75) ===
+
+
+=== Slide 29 (id=p10) ===
+
+
+=== Slide 30 (id=p12) ===
+
+
+=== Slide 31 (id=g3f803dc4478_0_13) ===
+
+
+=== Slide 32 (id=g3f2aa7eacd6_0_143) ===
+
+
+=== Slide 33 (id=g3f2aa7eacd6_0_148) ===
+
+
+=== Slide 34 (id=g3f519a99d7a_0_3) ===
+但如果是做成可以上傳資料才分析或變成抽籤網頁的程式的話？這樣可不可以？
+
+=== Slide 35 (id=g3f2aa7eacd6_0_98) ===
+重點是熟悉手感，大概知道怎麼跟 Claude Code 互動。
+​
+​
+學員動作：引用一個檔案，請 Claude Code 解釋它。
+
+=== Slide 36 (id=g3f803dc4478_0_37) ===
+
+
+=== Slide 37 (id=p14) ===
+AI 不是無限記憶，大概到 40%-60% 左右就開始有點錯亂了。
+​
+講者重點：知道它正在看什麼，才能知道它為什麼回答得好或不好。
+學員動作：執行 /context，觀察使用情況。
+​
+如果快到臨界點該怎麼辦？
+​
+
+=== Slide 38 (id=g3f803dc4478_0_45) ===
+​
+​
+
+=== Slide 39 (id=g3f2aa7eacd6_0_16) ===
+
+
+=== Slide 40 (id=g3ef020b959b_1_22) ===
+什麼是Context
+
+=== Slide 41 (id=g3f2a87223b3_0_82) ===
+
+
+=== Slide 42 (id=g3f803dc4478_0_7) ===
+通常會依現在的資料夾結構生成 CLAUDE.md，讓 AI 知道這個資料夾的用途。
+​
+學員動作：在範例 repo 執行 /init，觀察 Claude Code 如何理解資料夾。
+
+=== Slide 43 (id=p13) ===
+當對話太長、任務換方向、AI 開始混亂時，可以重新開始。
+​
+學員動作：練習清掉對話後重新提出任務。
+
+=== Slide 44 (id=g3f2aa7eacd6_0_34) ===
+
+
+=== Slide 45 (id=g3f2aa7eacd6_0_40) ===
+當你發現狀況不太對的時候，可以用/rewind，有點像Word的回到上一步
+
+=== Slide 46 (id=g3f2aa7eacd6_0_22) ===
+
+
+=== Slide 47 (id=g3f2aa7eacd6_0_28) ===
+
+
+=== Slide 48 (id=p15) ===
+Markdown 是純文字，容易保存、搜尋、版本控制，也容易被 AI 理解。你也可以試試哪些軟體能打開 .md 檔。
+​
+學員動作：建立或打開 README.md，看懂基本格式。
+
+=== Slide 49 (id=g3ef020b959b_1_43) ===
+LLM是無狀態的，所以我們需要告訴他現在要做什麼
+
+=== Slide 50 (id=p16) ===
+
+
+=== Slide 51 (id=g3f803dc4478_0_62) ===
+
+
+=== Slide 52 (id=g3f803dc4478_0_70) ===
+
+
+=== Slide 53 (id=g3f803dc4478_0_52) ===
+
+
+=== Slide 54 (id=g3f2a87223b3_0_108) ===
+
+
+=== Slide 55 (id=g3f2a87223b3_0_119) ===
+
+
+=== Slide 56 (id=g3f2aa7eacd6_0_131) ===
+如果沒有說明書，AI 只能猜你的偏好和規則。
+​
+學員動作：打開範例 repo 的 CLAUDE.md。
+
+=== Slide 57 (id=g3f3adf3b595_3_3) ===
+如果沒有說明書，AI 只能猜你的偏好和規則。
+​
+學員動作：打開範例 repo 的 CLAUDE.md。
+
+=== Slide 58 (id=g3f523192c63_0_1) ===
+如果沒有說明書，AI 只能猜你的偏好和規則。
+​
+學員動作：打開範例 repo 的 CLAUDE.md。
+
+=== Slide 59 (id=g3f2a87223b3_0_18) ===
+
+
+=== Slide 60 (id=g3f2aa7eacd6_0_167) ===
+
+
+=== Slide 61 (id=g3ef020b959b_1_51) ===
+因為每個session有Context的限制，所以透過subagent解決的這個問題，但就是比較貴
+
+=== Slide 62 (id=g3ef020b959b_1_60) ===
+
+
+=== Slide 63 (id=g3ef020b959b_1_86) ===
+
+
+=== Slide 64 (id=g3ef020b959b_1_94) ===
+
+
+=== Slide 65 (id=g3f2aa7eacd6_0_75) ===
+
+
+=== Slide 66 (id=g3f8229d1f41_0_7) ===
+
+
+=== Slide 67 (id=g3ef020b959b_1_101) ===
+
+
+=== Slide 68 (id=g3ef020b959b_1_112) ===
+
+
+=== Slide 69 (id=g3f519a99d7a_0_8) ===
+
+
+=== Slide 70 (id=g3f2aa7eacd6_0_63) ===
+
+
+=== Slide 71 (id=g3ef020b959b_1_34) ===
+
+
+=== Slide 72 (id=g3f52b6e7765_0_0) ===
+https://github.com/anthropics/k12-teacher-skills/tree/main/plugin/skills/k12-lesson-planning
+
+=== Slide 73 (id=p28) ===
+
+
+=== Slide 74 (id=p27) ===
+SKILL.md 由 frontmatter 和 markdown 內容組成。前者告訴 Claude 何時使用，後者告訴 Claude 使用時要遵守什麼。
+​
+學員動作：選一個常重複做的任務，試著拆成 frontmatter 與參考內容。
+
+=== Slide 75 (id=g3f2a87223b3_0_101) ===
+太多 Skill 反而會讓系統混亂，Claude Code 會不知道什麼情況該用哪個 Skill。
+​
+講者重點：太多 Skill 反而讓系統混亂。
+學員動作：刪掉太大的想法，縮小成一個具體任務。
+
+=== Slide 76 (id=g3f2a87223b3_0_142) ===
+太多 Skill 反而會讓系統混亂，Claude Code 會不知道什麼情況該用哪個 Skill。
+​
+不只是skill會漸進式揭露，整個系統我們到時候都要採漸進式揭露
+​
+
+=== Slide 77 (id=p29) ===
+
+
+=== Slide 78 (id=p30) ===
+
+
+=== Slide 79 (id=p31) ===
+
+
+=== Slide 80 (id=g3f2aa7eacd6_0_82) ===
+請你先參考 參考影片這個資料夾的影片的風格跟轉場，我想做一個影片介紹我如何用claude code生成一個AI素養的影片。
+場景一是顯示 如附圖的我在終端機輸入"請用Remotion建立一個60秒的30fps影片。先找出我對於AI素養的想法跟實踐，在用一個簡單有趣的動畫跟生活化的比喻，讓小學生
+能理解"AI素養" "這段prompt，但可能要用點打字機或什麼樣的效果呈現文字輸入的效果
+場景二claude code資料夾內的 OOO.png 作為過場的動畫
+場景三 才開始接續這個影片 “OOXX.mp4”
+
+=== Slide 81 (id=p33) ===
+https://github.com/gatelynch/html-slides
+​
+
+=== Slide 82 (id=p32) ===
+這個Token耗很大，研習的時候不要用啊
+
+=== Slide 83 (id=g3f2a87223b3_0_91) ===
+
+
+=== Slide 84 (id=g3f2c997aaf5_0_117) ===
+
+
+=== Slide 85 (id=p34) ===
+
+
+=== Slide 86 (id=g3f01ee84e5e_2_1) ===
+
+
+=== Slide 87 (id=g3f01ee84e5e_2_7) ===
+
+
+=== Slide 88 (id=g3ef020b959b_1_15) ===
+
+
+=== Slide 89 (id=g3f2aa7eacd6_0_68) ===
+
+
+=== Slide 90 (id=g3f0b75bec16_1_0) ===
+
+
+=== Slide 91 (id=g3f0b75bec16_1_6) ===
+了解你的未知
+你的未知是什麼？當我向 Claude 提出問題時，我傾向於用以下四種方式來拆解：
+ul.list-kix_cuif4n5oto6b-0 > li  { list-style-type: none }ul.list-kix_cuif4n5oto6b-0 > li:before { content: "●" " "}已知的已知 (Known Knowns)：這基本上就是我在prompt中寫的內容。我告訴 Agent 我想要什麼？已知的未知 (Known Unknowns)：我還沒想通，但已經意識到自己還不知道？未知的已知 (Unknown Knowns)：什麼是我顯而易見、從來不會寫下來，但如果看到就會認出來的事？未知的未知 (Unknown Unknowns)：有什麼是我完全沒有考慮過的？有哪些知識是我所不知道？我是否知道某件事到底能做到多好？最好的 Agent coders，擁有相對較少的未知。觀察像 Boris 或 Jarred 這樣的人提示時，我很明顯看出他們詳細知道自己想要什麼。他們與程式碼庫和模型行為都高度同步。
+但他們也會預設未知的存在。在許多方面，減少並為你的未知做規劃，就是 agentic coding的核心技能。幸運的是，這是一項你可以透過與 Claude 合作來提升的技能。
+讓 Claude 更好的幫助你
+指導 Claude 是一種微妙的平衡。如果你太具體，Claude 會死守你的指示，即使轉向可能更合適。如果你太模糊，Claude 往往會根據產業最佳實務做出選擇和假設，而這些可能不適合你的任務。
+當你沒有考量到未知時，兩頭都會落空。你既不知道路上何時會充滿障礙，也不知道路上何時會暢通，但你仍然希望 Claude 能在對的時候轉向。
+Claude 可以幫助你更快地發現未知。它能極快地搜尋你的程式碼庫和網路，而且對一般主題的了解比你多。它也能從失敗中更快迭代。
+這個過程中最重要的部分，是給 Claude 關於你起點的上下文。例如告訴它你目前的想法進度、你對問題和程式碼庫的經驗，並讓它像思考夥伴一樣與你合作。
+我之前寫過關於「使用 HTML 與 Claude 合作」的文章，在幾乎所有這些情況中，HTML 產物都是視覺化與呈現的最佳方式。
+在這篇文章中，我詳細說明了我用來揭露這些未知的一些模式。我不是每次都使用每一種技術，但這是一個很有用的技術集合。
+實作前（Pre-implementation）
+盲點掃描（Blind Spot Pass）
+在開始工作時，最有用的事情之一就是了解自己的盲點。例如，如果你正在程式碼庫的新部分撰寫功能，或使用 Claude 幫助你處理不熟悉的工作（如迭代設計），你很可能會有很多「未知的未知」。
+你可能不知道該問什麼問題、什麼樣子才算好、過去做了哪些工作，或該避開哪些坑。
+要做到這點，你可以請 Claude 幫助你找出未知未知並向你解釋。我喜歡使用「blindspot pass」和「unknown unknowns」這些字眼。提供關於你是誰以及你知道什麼的上下文，通常對讓它做好這件事很重要。
+範例提示：
+我正在嘗試新增一個身分驗證提供者（auth provider），但我對這份程式碼庫中的驗證模組（auth modules）一無所知。你能幫我進行一次盲點掃描（blindspot pass），協助我找出相關的『未知中的未知』（unknown unknowns），並引導我如何給你更好的提示詞（prompt）嗎？
+“I'm working on adding a new auth provider but I know nothing about the auth modules in this codebase. Can you do a blindspot pass to help me figure out my relevant unknown unknowns and help me prompt you better.”
+我不知道什麼是調色（color grading），但我需要為這段影片進行調色。你能教我了解關於調色中那些『我所不知道的未知領域』（unknown unknowns）嗎？這樣我才能寫出更好的提示詞（prompt）。
+“I don’t know what color grading is but I need to grade this video. Can you teach me to understand my unknown unknowns about color grading, so that I can prompt better?”
+腦力激盪與原型（Brainstorms and prototypes）
+當我在一個有很多「未知的已知」的領域工作時（涉及我只有在看到時才知道如何定義的標準），我喜歡請 Claude 與我一起腦力激盪和製作原型。
+在原型階段能辨識並表達未知的已知非常有價值，因為在實作過程中發現它們的成本（相對）較高。功能或規格的小變化，可能導致程式碼中截然不同的實作，而且代理要還原先前的變更會比較困難。
+例如，你可能只想看在框架中新增一個按鈕看起來如何，而不需要接上後端route或在前端維護額外狀態。
+視覺設計對我來說很難用語言描述，但我看到時就知道自己想要什麼。在這些情況下，我會要求針對一個產物提出幾種設計方法。
+我幾乎每次 Coding 工作階段都會從探索或腦力激盪階段開始。這有助於我從定義專案範圍的意圖開始。Claude 常常會找到我忽略的高價值方法，有時也會見樹不見林。腦力激盪可以防止我把範圍設得太窄或太寬。
+範例提示：
+我想要一個針對這些數據的儀表板，但我沒有視覺美感，也不清楚能做出什麼效果。請幫我製作一個包含 4 種截然不同設計方向的 HTML 頁面，好讓我能從中挑選並給予回饋。
+"I want a dashboard for this data but I have no visual taste and don't know what's possible. Make me an HTML page with 4 wildly different design directions so I can react to them."
+在開始撰寫任何程式邏輯之前，先建立一個單一的 HTML 檔案，用假資料模擬新的編輯器工具列。我希望在你動到實際的應用程式之前，先針對版面配置進行評估。
+“Before wiring anything up, make a single HTML file mocking the new editor toolbar with fake data. I want to react to the layout before you touch the real app."
+這是我目前遇到的大致問題：使用者在完成新手引導（onboarding）後就流失了。請搜尋程式碼庫並腦力激盪出 10 個我們可以介入的地方，從成本最低到最具野心的方案。我會告訴你哪些方案比較符合我的想法。
+"Here's my rough problem: users churn after onboarding. Search the codebase and brainstorm 10 places we could intervene, from cheapest to most ambitious. I'll tell you which ones resonate."
+訪談（Interviews）
+一旦我做了足夠的腦力激盪，我很可能仍然有未知。在這種情況下，我會請 Claude 針對任何未知或模糊之處來訪談我。請 Claude 訪談你時，試著給它關於你問題的上下文，以引導它的問題。
+範例提示：
+請針對任何模糊不清的地方一次問我一個問題，並優先提出那些答案會改變架構的問題。
+"Interview me one question at a time about anything ambiguous, prioritize questions where my answer would change the architecture."
+參考資料（References）
+有時你無法詳細描述自己想要什麼。例如，你可能沒有相關的語言，或者事情太複雜，需要花很長時間才能說清楚。
+在這種情況下，最好的答案就是參考資料。雖然你可以包含圖表、文件或圖片，但絕對最好的參考是原始碼。
+如果你有一個函式庫以特定方式實作了某些功能，或你很喜歡的設計元件，只要把 Fable 指向那個資料夾，並告訴它要找什麼，即使是不同語言的程式碼也沒問題。
+這也是 Claude Design 的運作方式。你不需要親手給它一個檔案（雖然你也可以這麼做）。你可以把它指向你喜歡的網站上的某個模組，它會讀取底層程式碼，而不只是截圖。這提供了更豐富的細節，包括標記、結構，以及元件實際的建構方式。
+範例提示：
+在 vendor/rate-limiter 中的這個 Rust crate 實作了完全符合我要求的退避（backoff）行為。請閱讀該程式碼，並在我們的 TypeScript API 用戶端中重新實作相同的語義。
+"This Rust crate in vendor/rate-limiter implements the exact backoff behavior I want. Read it and reimplement the same semantics in our TypeScript API client."
+實作計畫（Implementation Plans）
+當我認為自己準備好要實作時，我通常會請 Claude 為我整理一份實作計畫，讓我審核。這份計畫應該聚焦在最可能需要變更的部分，例如資料模型、型別介面或使用者體驗流程。這能讓 Claude 浮現出我可能真的需要調整的地方。
+範例提示：
+請用 HTML 格式撰寫一份實作計畫，但請將我最可能調整的決策放在最前面：包含資料模型的變更、新的型別介面（type interfaces）以及任何面向使用者的部分。至於機械式的重構工作則放在最後面，那部分我信任你的處理。
+"Write an implementation plan in HTML, but lead with the decisions I'm most likely to tweak with: data model changes, new type interfaces, and anything user-facing. Bury the mechanical refactoring at the bottom, I trust you on that part."
+實作期間（During implementation）
+實作筆記（Implementation notes）
+一旦我對計畫感到滿意，我就會開一個新工作階段，並將任何產物傳遞給提示。例如，我可能傳入規格文件和原型，請 agent 實作它。
+但事實是，無論你做了多少規劃，總是會有隱藏的「未知的未知」。agent 在工作過程中可能會發現，由於在程式碼中找到的邊緣案例，它需要採取不同的做法。
+我會請 Claude Code 保留一個暫時的 implementation-notes.md（或 .html）檔案，用來追蹤它做出的決定，以便我們在下一次嘗試時學習。
+範例提示：
+保持撰寫 implementation-notes.md 檔案的習慣。如果你遇到被迫偏離計畫的邊緣案例（edge case），請選擇保守的方案，將其記錄在『Deviations』（偏差）章節中，然後繼續進行。
+"Keep an implementation-notes.md file. If you hit an edge case that forces you to deviate from the plan, pick the conservative option, log it under 'Deviations', and keep going."
+實作後（Post implementation）
+提案與說明文件（Pitches and explainers）
+交付產品最重要的部分之一，就是取得認可與核准。在最終文件中建立提案和說明文件產物有助於：
+ul.list-kix_uj0f5c1dyvcb-0 > li  { list-style-type: none }ul.list-kix_uj0f5c1dyvcb-0 > li:before { content: "●" " "}加速理解（當審核者從與你相同的未知開始時）加速核准（當專家想看到你已經考量到未知，以及他們預期會遇到的常見失敗點時）範例提示：
+將原型、規格說明和實作筆記封裝成一份文件，讓我可以丟到 Slack 取得共識。開頭請先放上展示用的 GIF。
+"Package the prototype, the spec, and the implementation notes into a single doc I can drop in Slack to get buy-in. Lead with the demo GIF."
+測驗（Quizzes）
+經過長時間的工作階段後，Claude 可能已經完成比我意識到的更多事情。只看程式碼差異只能讓我對發生的事情有粗淺的了解，因為許多行為取決於既有的程式碼路徑。
+在給我大量上下文後，請 Claude 針對變更來測驗我，有助於我理解到底發生了什麼。我只有在通過測驗後才會合併(merge)。
+範例提示：
+我想確保自己完全理解這次變更中發生的所有事情。請給我一份關於這些變更的 HTML 報告，讓我能結合上下文、直覺以及具體執行內容等進行閱讀與理解，並在底部附上一個關於這些變更的測驗，且我必須通過該測驗
+“I want to make sure I understand everything that's happened in this change. Give me a HTML report on the changes for me to read and understand with context, intuition, what was done, etc. and a quiz at the bottom on the changes that I must pass.”
+這一切如何整合：推出 Fable
+Fable 的推出影片完全由 Claude Code 編輯。這對我來說是一個全新的領域，我絕對不是專家。
+所以我從我所知道的開始。我知道 Claude 可以用程式碼來編輯影片和轉錄，但我不確定準確度是否足夠。然後我請 Claude 向我解釋像 Whisper 這樣的轉錄如何運作，以及我是否能用 ffmpeg 準確地剪掉「嗯」或長停頓。
+我希望 Claude 建立一個與我說話內容同步的 UI，但我不知道它是否做得到，所以我請 Claude 用 Remotion 和轉錄檔建立一個原型影片，看看是否可行。
+最後，影片看起來有點暗淡，我知道這是色彩分級（color grading）的結果，但我其實不太知道色彩分級是什麼。我的第一個嘗試是請 Claude 做幾個變化讓我挑選，但我發現我不知道「好」的色彩分級看起來是什麼。所以我改為請 Claude 教我色彩分級，來發現我的未知。
+讓地圖與實際場域相符
+模型越強大，你就能用正確的方法達成更多目標。當一個長時程任務回傳錯誤時，很可能是你需要花更多時間定義你的未知，或建立一份允許 Claude 在未知中即興發揮的實作計畫。
+每一個說明文件、腦力激盪、訪談、原型和參考，都是在變得昂貴之前，找出你不知道的事物的廉價方式。
+所以，從你的下一個專案開始，請 Claude 幫助你找出你那些「未知的未知」。
+​
+
+=== Slide 92 (id=g3f803dc4478_0_81) ===
+但對大多數 AI 工程師來說，撰寫一個好的skill一直以來都像是鄉野傳說：靠演講、推文，以及不斷的嘗試錯誤累積經驗。
+現在，這種情況可以改變了。有三篇論文用這個產業衡量所有事物的方式來評量技能：執行任務、為結果評分、比較不同條件。結果產生了一本撰寫技能的真實規則手冊，裡面包含許多反直覺的建議。
+什麼才是一個skill？
+一如往常，我們值得先確認大家談論的是同一件事。就這篇貼文的目的而言，skill是一個 agent 在需要時動態載入的、打包好的領域知識資料夾：包含指示(instructions)、專業詞彙表，有時還包括腳本和資源。
+它位於一個越來越豐富的容器光譜上，從提示詞（prompts）、工具（tools），到新創的「配方」（recipe）。這個「配方」(recipe)概念來自 Introspection 的 Roland Gavrilescu，他將其定義為比技能更高一層的類別：
+「我們從代理工具進化到代理技能。配方是一個更大的容器」，它加入了評估（evals）、評判機制（judges），以及能讓系統隨時間改善的回饋訊號。
+SkillsBench 論文（arXiv:2602.12670，首次發表於 2026 年 2 月）提供了正式定義：技能必須是模組化且可重複使用的，帶有程序性指導，並且能夠跨不同模型移植（最後這一點其實相當棘手！）。
+系統提示詞(system prompt)不具備這些特性，RAG 檢索或工具描述也不是技能。該論文作者提出一個比喻：模型就像 CPU，harness就像作業系統，而技能則是應用程式。
+那麼，這三篇論文對於「好的技能應該包含什麼」，究竟發現了什麼？以下是五個關鍵發現。
+1. 不要讓模型自己撰寫技能
+要求你的代理人為你撰寫技能，這非常誘人。SkillsBench 針對這點進行了精確測試，在三種條件下執行每項任務：無技能、專家策劃的技能，以及模型自己產生的技能。
+結果顯示：
+ul.list-kix_via2glkcwpcf-0 > li  { list-style-type: none }ul.list-kix_via2glkcwpcf-0 > li:before { content: "●" " "}專家策展的技能大幅提升通過率。�模型自我產生的技能則完全沒有幫助，平均比「無技能」基準還低 1.3 分。�作者結論：模型無法可靠地撰寫它們自己會受益的程序性知識。
+失敗模式很有啟發性。模型要嘛寫出模糊的程序（例如「使用 pandas 進行資料處理」，但沒有實際的 API 使用模式），要嘛根本無法辨識哪些地方需要專業知識。
+期望模型自己學習也沒有回報：技能演化論文 SkillComposer（arXiv:2606.06079，2026 年 6 月）發現，從先前嘗試解決相同問題的日誌中無控制地提取技能，會讓程式碼撰寫表現低於無技能基準。
+這是　Bakaus 在 AIEWF 對 Latent Space 所說內容的實證版本。他的設計技能「Impeccable」運作方式是，將模型模糊理解的詞彙，賦予精確的專業意義。如果要求一個未經輔助的模型讓頁面變得「更大膽（bolder）」，你會得到漸層和霓虹色；而 Impeccable 則透過層次結構、比例和果斷的排版來定義大膽。「一個背後沒有支撐的形容詞只是一個漂亮的點綴，」Bakaus 說道，「你真的必須告訴 Agent 你的意思。」專家級的詞彙量正是技能的價值所在，而現在的數據顯示，模型無法自行提供這些內容。
+Gavrilescu 坦率地指出了限制：「如果沒有人類先進行提取，你無法簡單地將所有這些知識捕捉到一個 Markdown 檔案中。」
+所以你必須親自撰寫。那麼skill應該有多大？
+2. 撰寫詳盡的技能並非正確做法
+SkillsBench 發現，僅包含兩到三個檔案的聚焦型技能，表現優於包含更多檔案的大型技能包，以及詳盡的文件。
+那些試圖記錄一切的全面性技能，實際上會讓通過率低於無技能基準。詳細但範圍明確的技能，始終勝過百科全書式的技能。
+這與目前最優秀的技能作者的做法一致。Bakaus 將設計問題描述為尋找「精確的控制層級」：不是所有事情都適合放在技能這個抽象層級，直接操作小調整仍然更快，而在探索階段，開放式提示詞仍然有用。
+skill的價值在於將模型反覆出錯的判斷邏輯編碼起來，而非只是寫成操作手冊
+想要做到面面俱到的本能是敵人。你加入的每一段文字，都會與其他段落競爭模型的注意力，而超過一個驚人地低的門檻後，新增內容反而會造成損害。
+這也引發了一個問題：當我們從單一 skill 擴展到整個skill libary時，會發生什麼？
+3. 載入更多技能會讓代理人表現變差
+如果一個skill有幫助，那載入整個技能庫肯定更有幫助吧？
+這篇關於生成式技能組合的論文（同樣命名為 SkillComposer，arXiv:2606.32025，2026 年 6 月 30 日）直接測試了這點。將整個包含 196 個技能 的技能庫注入上下文，在程式碼任務上的表現比只選擇小而相關的子集合差了 16 分，同時還多消耗了 23% 的輸入 token。讓上下文氾濫，會同時在準確性和成本上失敗。
+有選擇性地使用效果好得多。該論文將技能選擇視為一個組合問題：選哪些技能、選多少、依什麼順序。
+他們的組合器是一個只有 390 萬參數 的小模型，專門用來輸出有序的技能 ID 清單，在 GPT-5.2-Codex 上將通過率比無技能基準提升了 23.1 分，並且接近「神諭」等級（總是選擇完美技能的東西）。
+Bakaus 從實務端也得出了相同的架構，在 Impeccable 內建路由機制，將任務導向相關指示，他將此比喻為 mixture-of-experts 模型。
+一個團隊用專用模型在技能之外進行路由，另一個則在技能內部路由，兩者存在的原因相同：技能的好壞，取決於決定何時載入它們的機制。
+好，所以你親自撰寫、保持簡短、不要寫太多skill。現在，你的技能還必須在實際執行時存活下來。
+4. 在每個聲稱支援的每個執行環境（harness）中進行測試
+skill 在格式上是可移植的（大家都接受 SKILL.md 檔案），但實際行為上並非如此。
+SkillsBench 在多個執行環境中評估相同的技能，發現根據模型與執行環境的配置不同，技能帶來的提升幅度從 4.1 分到 25.7 分 不等。
+ul.list-kix_a2cv80cctzfu-0 > li  { list-style-type: none }ul.list-kix_a2cv80cctzfu-0 > li:before { content: "●" " "}Claude Code 顯示出最高的技能利用率。�Codex CLI 經常完全忽略技能：它會確認技能的內容，然後還是實作自己的解決方案。�這個發現對專業的技能作者來說並不意外。Bakaus 指出，Codex 和 Claude 處理子代理（subagents）或權限的方式不同，因此針對 Claude Code、Cursor、GitHub Copilot 和 Codex 的技能，不能假設它們具備相同的能力。
+Impeccable 的解決方案是，針對每個目標執行環境發佈不同的編譯版本。針對具有已知不良習慣的模型的技能，會額外加入禁止那些特定習慣的規則。
+可移植性不是你在相容性欄位中宣告的屬性，而是你針對每個目標實際產出的工程結果，而執行環境本身就是技能行為的一部分。
+親自撰寫、保持簡短、不要寫太多、針對每個執行環境發佈版本。但技能應該關注什麼主題？
+5. 將技能瞄準模型最弱的地方
+SkillsBench 按領域衡量技能帶來的提升：
+ul.list-kix_x650an7btwfq-0 > li  { list-style-type: none }ul.list-kix_x650an7btwfq-0 > li:before { content: "●" " "}軟體工程領域只有 4.5 分 的提升�醫療保健領域高達 51.9 分�製造業緊隨其後�技能在軟體領域幫助最小，因為模型在預訓練資料中已經飽和；而在模型覆蓋較薄的領域，幫助最大。
+SkillsBench 的作者也爬取了公開的技能生態系統，發現所有技能中有 38% 是軟體開發技能。社群正在大量建構技能的地方，正是幫助最小的領域。
+如果你正在決定要把撰寫技能的精力投入哪裡，套利機會在於模型尚未熟知的領域：
+ul.list-kix_z82zlee69wsy-0 > li  { list-style-type: none }ul.list-kix_z82zlee69wsy-0 > li:before { content: "●" " "}公司的內部慣例�受管制的產業�專業化的工作流程�任何模型預訓練資料較淺的地方�通用的程式碼工作流程技能，是一個競爭激烈但邊際效益小的領域。而公司內部團隊如何審查供應商合約的技能，則不然。
+所有五個發現都依賴同一個前提：它們都是透過仔細的測量發現的，這表示你不能盲目套用它們。
+沒有測試，你無法知道你的技能是否有效
+以上所有結果都來自相同的方法，而這是你自己也可以執行的方法：
+準備一組任務，分別執行兩次：一次載入技能，一次不載入，其他條件保持不變。用相同方式為兩次結果評分，然後觀察差異。就是這麼簡單。
+這些論文使用的評分方式是自動化檢查，一個驗證輸出並回傳通過或失敗的腳本，沒有人工判斷，這使得比較可信且可重複。
+這之所以重要，是因為技能可能造成傷害。在 SkillsBench 中，84 個任務中有 16 個在載入技能後的表現比不載入還差。
+你無法透過肉眼觀察輸出來發現這點，因為載入技能後的輸出通常看起來更專業，即使通過率更低。只有「有技能 vs 無技能」的比較才能捕捉到這點。
+技能演化論文更進一步，將此作為品質門檻：只有當技能的修改能讓任務套件的通過率提升一個有意義的幅度時，才會被接受。保留那些經測量確實有幫助的內容，捨棄沒有幫助的。
+這將技能維護從「感覺」轉變為一個迴圈，而這正是 Gavrilescu 的「配方」概念所描述的迴圈，將評估和回饋訊號包裝成技能成品的第一級組成部分。這些正是 Arize AX 能幫助你建構的評估類型。
+這留下了一些缺口。當沒有自動化檢查存在時（例如「設計是否變得更粗體」沒有通過/失敗的標準），你要如何評分？以及如何衡量 Bakaus 在 AIEWF 提出的失敗模式：「如果每個人都使用相同的技能來做前端設計工作，最後所有東西看起來都會一樣」？
+一個讓使用者之間的輸出多樣性崩壞的技能，即使每個單獨的輸出都得分高，也是失敗的。這兩者都需要這個領域尚未標準化的評估方法。
+鄉野傳說時代已經結束
+五個月前，撰寫好的技能意味著要向零散的研討會演講學習。現在，有一個由數萬次實驗支持的檢查清單：
+ul.list-kix_xrzmfqxrf7zt-0 > li  { list-style-type: none }ul.list-kix_xrzmfqxrf7zt-0 > li:before { content: "●" " "}親自撰寫�保持小規模�不要寫太多�針對每個執行環境測試�在模型最弱的領域下手�用評估來驗證每一次修改�​
+
+=== Slide 93 (id=g3f2aa7eacd6_0_109) ===
+這是把今天學到的 Claude Code、第二大腦、評估標準整合起來。
+​
+學員動作：完成第一份 SKILL.md 草稿。
+
+=== Slide 94 (id=g3f2aa7eacd6_0_116) ===
+這是把今天學到的 Claude Code、第二大腦、評估標準整合起來。
+​
+學員動作：完成第一份 SKILL.md 草稿。
+
+=== Slide 95 (id=g3f2c997aaf5_0_26) ===
+這只是我粗略抓的方式，老師們可以根據自己的實際經驗，用便利貼調整
+
+=== Slide 96 (id=g3f2c997aaf5_0_72) ===
+一起想想，哪些事情是你要做決定，哪些是AI負責？哪些是AI做得再好你也不會交給AI？哪些是可以交給AI，但是標準在哪？
+
+=== Slide 97 (id=g3f519a99d7a_0_14) ===
+
+
+=== Slide 98 (id=g3f2c997aaf5_0_93) ===
+
+
+=== Slide 99 (id=g3f2aa7eacd6_0_125) ===
+這是把今天學到的 Claude Code、第二大腦、評估標準整合起來。
+​
+學員動作：完成第一份 SKILL.md 草稿。
+
+=== Slide 100 (id=g3f2a87223b3_0_3) ===
+你已經打造出自己的 MVP 系統。請自己檢查後逐項打勾。
+​
+講者重點：讓學員知道自己已完成一個最小可用系統。
+學員動作：逐項打勾。
+
+=== Slide 101 (id=g3f2c997aaf5_0_6) ===
+
+
+=== Slide 102 (id=g3f2c997aaf5_0_11) ===
+
+
+=== Slide 103 (id=g3f2c997aaf5_0_20) ===
+
+
+=== Slide 104 (id=g3ef020b959b_1_78) ===
+第二大腦是使用中長大的，不會一次完成，要定期檢視與調整。
+​
+學員動作：寫下下週要跑的一個流程。
+
+=== Slide 105 (id=p6) ===
+如果卡住了就截圖問 Claude Code。
+​
+講者重點：先用共同範例資料練習，避免每個人一開始都卡在自己的資料太亂。
+學員動作：會 Git 用 git clone；不熟 Git 就在 GitHub 頁面按 Code → Download ZIP。
+
+=== Slide 106 (id=p19) ===
+試著請大家自己試試看。
+​
+講者重點：試著請大家下載操作。
+學員動作：一定要自己做。
+
+=== Slide 107 (id=g3f0b75bec16_1_13) ===
+試著請大家自己試試看。
+​
+講者重點：試著請大家下載操作。
+學員動作：一定要自己做。
+
+=== Slide 108 (id=p22) ===
+資料夾規則是在告訴 AI 每份資料的位置與功能，該遵循什麼規則處理。
+​
+講者重點：不是收納術，而是告訴 AI 每份資料現在扮演什麼角色。
+學員動作：確認範例 repo 的資料夾結構。
+
+=== Slide 109 (id=p23) ===
+如果只是把所有東西丟進資料夾，那叫備份，不叫第二大腦。第二大腦讓資料重新參與思考，幫你找出沒發現的細節與脈絡。
+​
+學員動作：區分「備份」和「編譯」。
+
+=== Slide 110 (id=p24) ===
+真的不懂也沒關係，就出張嘴叫 Claude Code 做就好。
+​
+講者重點：不需要把 Git 教成工程課，只要讓知識工作者知道它能保護自己的知識庫。
+學員動作：看一次 git status 或由講者示範。
+
+=== Slide 111 (id=g3f2aa7eacd6_0_56) ===
+
+
+=== Slide 112 (id=g3f2aa7eacd6_0_49) ===
+
+
+=== Slide 113 (id=g3f2aa7eacd6_0_153) ===
+
+
+=== Slide 114 (id=p36) ===
+
+
+=== Slide 115 (id=g3f2381bfada_0_0) ===
+
+
+=== Slide 116 (id=g3f519a99d7a_0_36) ===
+
+
+=== Slide 117 (id=g3f523192c63_0_11) ===
+
+
+=== Slide 118 (id=p37) ===
+工具只是入門，真正重要的是系統與流程。
