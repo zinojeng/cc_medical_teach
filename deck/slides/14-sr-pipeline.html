@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P14 · Systematic Review 流水線</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 140px; left: 110px; right: 110px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
+  .head .left { flex: 1; }
+  h1.slide-title { margin-top: 20px; font-size: 58px; line-height: 1.2; }
+  p.lead { margin-top: 14px; font-size: 23px; }
+  .harness { flex: none; width: 600px; border-left: 4px solid var(--teal); padding: 8px 0 8px 24px; font-size: 21px; line-height: 1.58; color: var(--ink-soft); }
+  .harness b { color: var(--teal); }
+
+  table { margin-top: 28px; width: 100%; border-collapse: collapse; font-size: 19.5px; }
+  th { font-family: var(--serif); font-weight: 700; text-align: left; font-size: 21px; padding: 10px 18px; border-bottom: 3px solid var(--ink); }
+  td { padding: 9.5px 18px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: middle; }
+  td.st { font-family: var(--mono); font-size: 16.5px; color: var(--muted); width: 76px; }
+  td.stage { font-weight: 700; color: var(--ink); width: 200px; }
+  td.agent { width: 190px; }
+  td.agent span { display: inline-block; font-size: 17px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper-warm); color: var(--ink-soft); white-space: nowrap; }
+  td.agent span.appr { background: rgba(193,95,60,0.12); border-color: rgba(193,95,60,0.4); color: var(--clay-deep); }
+  td.agent span.data { background: var(--teal-soft); border-color: rgba(46,110,99,0.35); color: var(--teal); }
+  td.out { font-family: var(--mono); font-size: 17.5px; color: var(--ink-soft); }
+  td.out b { color: var(--clay-deep); font-weight: 500; }
+  tr.you td { background: rgba(140,47,31,0.06); }
+  tr.you td.stage { color: var(--alert); }
+
+  .foot-note { margin-top: 22px; display: flex; gap: 34px; align-items: baseline; }
+  .foot-note .badge { flex: none; font-family: var(--mono); font-size: 17px; color: var(--alert); border: 1px solid rgba(140,47,31,0.4); border-radius: 999px; padding: 4px 15px; }
+  .foot-note p { font-size: 21px; line-height: 1.55; color: var(--ink-soft); }
+  .foot-note p b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>05 · 多 AGENT 協作</span></div>
+
+  <div class="content">
+    <div class="head">
+      <div class="left">
+        <div class="kicker">SYSTEMATIC REVIEW · 9 STAGES</div>
+        <h1 class="slide-title">每一站，都有明確的<br><span class="clay">輸入與輸出契約</span></h1>
+        <p class="lead">這就是 Harness Engineering 的具體長相——不是把整篇 review 丟給一個 prompt。</p>
+      </div>
+      <p class="harness">流程被切成九站、每站的 input／output 都被定義，代表<b>可以逐站驗收、出錯時知道是哪一站</b>。</p>
+    </div>
+
+    <table>
+      <tr><th class="st">站</th><th>階段</th><th>負責 Agent</th><th>產物（存入 wiki）</th></tr>
+      <tr><td class="st">01</td><td class="stage">研究計畫</td><td class="agent"><span>研究設計</span></td><td class="out">PICO 問句 · <b>search_protocol</b> · 納入排除條件</td></tr>
+      <tr><td class="st">02</td><td class="stage">文獻搜尋</td><td class="agent"><span>文獻</span></td><td class="out"><b>paper_collection</b> · 檢索式與資料庫紀錄</td></tr>
+      <tr class="you"><td class="st">03</td><td class="stage">篩選 Screening</td><td class="agent"><span class="appr">評讀</span></td><td class="out"><b>included_studies</b> · title／abstract 篩選理由</td></tr>
+      <tr><td class="st">04</td><td class="stage">資料萃取</td><td class="agent"><span class="data">資料分析</span></td><td class="out"><b>extracted_data</b> · study characteristics 表</td></tr>
+      <tr><td class="st">05</td><td class="stage">品質評估</td><td class="agent"><span class="appr">評讀</span></td><td class="out">Cochrane <b>bias_assessment</b> · GRADE 分級</td></tr>
+      <tr><td class="st">06</td><td class="stage">綜合分析</td><td class="agent"><span class="data">資料分析</span></td><td class="out"><b>synthesis_results</b> · forest plot · 異質性</td></tr>
+      <tr><td class="st">07</td><td class="stage">撰寫初稿</td><td class="agent"><span>寫作</span></td><td class="out"><b>draft_manuscript</b>（IMRaD）</td></tr>
+      <tr><td class="st">08</td><td class="stage">引用整理</td><td class="agent"><span>引用</span></td><td class="out"><b>formatted_manuscript</b> · Vancouver 參考列表</td></tr>
+      <tr><td class="st">09</td><td class="stage">審修定稿</td><td class="agent"><span>審修</span></td><td class="out"><b>final_manuscript</b> · PRISMA flow diagram</td></tr>
+    </table>
+
+    <div class="foot-note">
+      <span class="badge">紅線</span>
+      <p>第 03 站的<b>納入排除、以及第 09 站的結論是否站得住，最終判斷永遠是你的</b>——Agent 產出的是候選與草稿，不是可以直接投稿的定論。</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>多 Agent 協作</span><span>14 / 22</span></div>
+</body>
+</html>

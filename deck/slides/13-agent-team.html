@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P13 · 八個專科 Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 146px; left: 110px; right: 110px; display: grid; grid-template-columns: 560px 1fr; column-gap: 80px; }
+  h1.slide-title { margin-top: 24px; font-size: 66px; }
+  p.lead { margin-top: 22px; font-size: 25px; line-height: 1.72; }
+  .why { margin-top: 34px; }
+  .why-item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .why-item:first-child { border-top: 3px solid var(--ink); }
+  .why-item h4 { font-size: 23px; font-weight: 700; }
+  .why-item p { margin-top: 5px; font-size: 20.5px; line-height: 1.55; color: var(--ink-soft); }
+  .src { margin-top: 26px; font-family: var(--mono); font-size: 17.5px; color: var(--muted); line-height: 1.7; }
+
+  .grid { padding-top: 96px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ag { background: var(--card); border: 1px solid var(--line); padding: 22px 24px; }
+  .ag .n { font-family: var(--mono); font-size: 16px; letter-spacing: 0.14em; color: var(--muted); }
+  .ag h3 { font-family: var(--serif); font-weight: 900; font-size: 26px; margin-top: 6px; line-height: 1.25; }
+  .ag p { margin-top: 8px; font-size: 19px; line-height: 1.52; color: var(--ink-soft); }
+  .ag.coord { grid-column: span 3; background: #262319; border-color: #262319; display: flex; align-items: center; gap: 30px; padding: 24px 30px; }
+  .ag.coord .left { flex: none; }
+  .ag.coord .n { color: rgba(233,228,212,0.5); }
+  .ag.coord h3 { color: #E8B08A; margin-top: 4px; white-space: nowrap; }
+  .ag.coord p { margin-top: 0; color: rgba(243,239,229,0.82); font-size: 20.5px; }
+  .ag.coord p b { color: #F3EFE5; }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>05 · 多 AGENT 協作</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">A RESEARCH ASSEMBLY LINE</div>
+      <h1 class="slide-title">研究不是<br>一個 Agent 的事</h1>
+      <p class="lead">承接上一頁的 subagent 概念——真實的研究流程，是一條由<b>八個專科 Agent</b> 組成的產線。</p>
+
+      <div class="why">
+        <div class="why-item"><h4>為什麼要拆開？</h4><p>每個 subagent 有獨立 context——九站流程跑完也不會撞上「用到一半就錯亂」的牆。</p></div>
+        <div class="why-item"><h4>專業分工，各有 checklist</h4><p>評讀用 Cochrane RoB 與 GRADE，統計用 forest plot 與異質性檢定——不是同一套泛用提示詞。</p></div>
+        <div class="why-item"><h4>產物落在 wiki，不在聊天室</h4><p>每一站的輸出都是檔案，能被下一站讀取，也能被你 grep 驗證。</p></div>
+      </div>
+
+      <p class="src">參考實作：github.com/zinojeng/<br>academic-research-agents（MCP server ＋ 8 agents）</p>
+    </div>
+
+    <div class="grid">
+      <div class="ag"><div class="n">AGENT 1</div><h3>研究設計</h3><p>PICO 問句、假設、納入排除條件、樣本數與 power</p></div>
+      <div class="ag"><div class="n">AGENT 2</div><h3>文獻搜尋</h3><p>PubMed／arXiv／Semantic Scholar、PDF 解析、引用網絡分析</p></div>
+      <div class="ag"><div class="n">AGENT 3</div><h3>品質評讀</h3><p>Cochrane RoB 偏差風險、方法學審查、GRADE 證據分級</p></div>
+      <div class="ag"><div class="n">AGENT 4</div><h3>資料分析</h3><p>效應量彙整、forest plot、異質性、meta-analysis</p></div>
+      <div class="ag"><div class="n">AGENT 5</div><h3>學術寫作</h3><p>依 IMRaD 結構草擬 introduction／methods／discussion</p></div>
+      <div class="ag"><div class="n">AGENT 6</div><h3>引用管理</h3><p>Vancouver／APA 格式轉換、全文引用對照檢查</p></div>
+      <div class="ag"><div class="n">AGENT 7</div><h3>審修潤稿</h3><p>文法、學術語氣、冗詞收斂與一致性</p></div>
+      <div class="ag" style="border-top:4px solid var(--teal)"><div class="n">你</div><h3>臨床判斷</h3><p>選題、納入排除的最終決定、結論是否站得住</p></div>
+      <div class="ag coord">
+        <div class="left"><div class="n">AGENT 8 · ORCHESTRATOR</div><h3>總協調 Coordinator</h3></div>
+        <p>決定<b>誰先做、誰平行跑、產物怎麼傳遞</b>——把七個專科 Agent 編排成一條可重複執行的流程。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>多 Agent 協作</span><span>13 / 22</span></div>
+</body>
+</html>

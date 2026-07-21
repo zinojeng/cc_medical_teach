@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P09 · 醫學文獻工作流</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 146px; left: 110px; right: 110px; }
+  h1.slide-title { margin-top: 24px; font-size: 66px; }
+  p.lead { margin-top: 18px; font-size: 25px; }
+  .flow { margin-top: 40px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+  .step { position: relative; padding: 0 30px 0 0; }
+  .step + .step { padding-left: 34px; }
+  .step + .step::before { content: "→"; position: absolute; left: 2px; top: 30px; font-size: 30px; color: var(--muted); }
+  .step .no { font-family: var(--mono); font-size: 18px; letter-spacing: 0.16em; color: var(--clay); }
+  .step h3 { font-family: var(--serif); font-weight: 900; font-size: 29px; margin-top: 8px; line-height: 1.28; }
+  .step p { margin-top: 10px; font-size: 20.5px; line-height: 1.58; color: var(--ink-soft); }
+  .step code { font-family: var(--mono); font-size: 18px; color: var(--clay-deep); }
+  .lower { margin-top: 44px; display: grid; grid-template-columns: 1fr 780px; column-gap: 70px; }
+  .prompt { background: #262319; border-radius: 10px; padding: 32px 38px; }
+  .prompt .h { font-family: var(--mono); font-size: 17px; letter-spacing: 0.14em; color: rgba(233,228,212,0.5); border-bottom: 1px solid rgba(233,228,212,0.18); padding-bottom: 12px; margin-bottom: 18px; }
+  .prompt p { font-size: 22px; line-height: 1.72; color: #E9E4D4; }
+  .prompt p + p { margin-top: 14px; }
+  .prompt b { color: #E8B08A; }
+  .gain { display: flex; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+  .gain:first-child { border-top: 3px solid var(--ink); }
+  .gain .mark { color: var(--teal); font-size: 22px; flex: none; padding-top: 2px; }
+  .gain h4 { font-size: 24px; font-weight: 700; }
+  .gain p { margin-top: 5px; font-size: 20.5px; line-height: 1.55; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div class="kicker">LITERATURE REVIEW PIPELINE</div>
+    <h1 class="slide-title">醫學文獻搜尋 → <span class="clay">Wiki</span> 的六步工作流</h1>
+    <p class="lead">從「每次都要重讀一遍」變成「這個題目的知識，會自己長大」。</p>
+
+    <div class="flow">
+      <div class="step">
+        <div class="no">STEP 1</div>
+        <h3>搜尋</h3>
+        <p>PubMed／Europe PMC／Consensus 找候選 paper，先看 title＋abstract 篩選。</p>
+      </div>
+      <div class="step">
+        <div class="no">STEP 2</div>
+        <h3>落地</h3>
+        <p>PDF 存進 <code>raw/</code>，檔名帶年份與第一作者。原始檔<b>只讀不改</b>。</p>
+      </div>
+      <div class="step">
+        <div class="no">STEP 3</div>
+        <h3>Ingest</h3>
+        <p>LLM 寫 source 摘要頁，並更新疾病頁、藥物頁、trial 頁——一篇 paper 觸及 10–15 頁。</p>
+      </div>
+      <div class="step">
+        <div class="no">STEP 4</div>
+        <h3>Synthesis</h3>
+        <p>維護一頁「這題目目前的證據怎麼說」——新研究進來就改寫論點，不是另開一頁。</p>
+      </div>
+      <div class="step">
+        <div class="no">STEP 5–6</div>
+        <h3>Lint＋回存</h3>
+        <p>找出被新 RCT 推翻的舊結論；比較表、評讀結果回存成新頁面。</p>
+      </div>
+    </div>
+
+    <div class="lower">
+      <div class="prompt">
+        <div class="h">實際下給 CLAUDE CODE 的指令</div>
+        <p>「請 ingest <b>raw/</b> 內尚未處理的三篇 paper。每篇寫一頁摘要（含 PICO、樣本數、主要結果與 95% CI，<b>數字逐字對照原文</b>）；接著更新 <b>entities/drugs/glp1-ra.md</b> 與相關疾病頁；</p>
+        <p>若新結果與 <b>syntheses/</b> 現有結論衝突，<b>不要直接覆寫</b>——在該頁開一個『爭議』段落並列出雙方證據，然後在 <b>log.md</b> 記一筆。」</p>
+      </div>
+
+      <div class="gains">
+        <div class="gain"><span class="mark">✓</span><div><h4>Meeting 前不用重讀十篇</h4><p>讀 synthesis 頁就能掌握全局，再回頭查細節。</p></div></div>
+        <div class="gain"><span class="mark">✓</span><div><h4>矛盾會自己浮出來</h4><p>新舊研究衝突被明確標記，而不是安靜地被覆蓋掉。</p></div></div>
+        <div class="gain"><span class="mark">✓</span><div><h4>寫 review 時素材已就緒</h4><p>entity 頁與 synthesis 頁本身就是 review 的骨架與引用來源。</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>09 / 22</span></div>
+</body>
+</html>

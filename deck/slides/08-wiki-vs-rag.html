@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>P08 · 何時用 LLM Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+  .content { position: absolute; top: 150px; left: 110px; right: 110px; display: grid; grid-template-columns: 1fr 800px; column-gap: 84px; }
+  h1.slide-title { margin-top: 26px; font-size: 68px; }
+  p.lead { margin-top: 22px; font-size: 26px; max-width: 900px; }
+  table { margin-top: 36px; width: 100%; border-collapse: collapse; font-size: 22.5px; line-height: 1.55; }
+  th { font-family: var(--serif); font-weight: 700; text-align: left; padding: 14px 22px; border-bottom: 3px solid var(--ink); font-size: 25px; }
+  th.rag { color: var(--muted); }
+  th.wiki { color: var(--clay-deep); }
+  td { padding: 16px 22px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+  td.dim { width: 150px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+  td.wiki-cell { background: rgba(193,95,60,0.07); color: var(--ink); }
+  .sweet { margin-top: 30px; border-left: 4px solid var(--teal); padding: 10px 0 10px 26px; font-size: 24px; line-height: 1.65; color: var(--ink-soft); }
+  .sweet b { color: var(--teal); }
+  .tree { margin-top: 108px; background: #262319; color: #E9E4D4; border-radius: 10px; padding: 30px 40px; font-family: var(--mono); font-size: 20px; line-height: 1.62; }
+  .tree .h { color: rgba(233,228,212,0.5); font-size: 17px; letter-spacing: 0.12em; border-bottom: 1px solid rgba(233,228,212,0.18); padding-bottom: 12px; margin-bottom: 16px; }
+  .tree .dir { color: #E8B08A; }
+  .tree .dim2 { color: rgba(233,228,212,0.45); }
+  .caveat { margin-top: 22px; background: rgba(140,47,31,0.07); border: 1px solid rgba(140,47,31,0.3); border-left: 5px solid var(--alert); padding: 20px 28px; }
+  .caveat h3 { font-family: var(--serif); font-weight: 900; font-size: 25px; color: var(--alert); }
+  .caveat p { margin-top: 9px; font-size: 20.5px; line-height: 1.56; color: var(--ink-soft); }
+  .caveat p b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="masthead"><span class="brand">把 Claude Code 變成你的<b>第二大腦</b></span><span>02 · 打地基</span></div>
+
+  <div class="content">
+    <div>
+      <div class="kicker">WHEN TO USE WHICH</div>
+      <h1 class="slide-title">文獻回顧，正是<br>LLM Wiki 的<span class="clay">甜蜜點</span></h1>
+      <p class="lead">兩者不是取代關係，是適用場景不同。</p>
+
+      <table>
+        <tr><th style="width:150px">面向</th><th class="rag">RAG</th><th class="wiki">LLM Wiki</th></tr>
+        <tr><td class="dim">語料規模</td><td>百萬份、持續變動</td><td class="wiki-cell">有界、精選——數十到數百篇</td></tr>
+        <tr><td class="dim">核心需求</td><td>精準檢索單一片段</td><td class="wiki-cell">跨來源綜合出結論</td></tr>
+        <tr><td class="dim">狀態</td><td>無狀態，每次從頭</td><td class="wiki-cell">有狀態，知識會複利</td></tr>
+        <tr><td class="dim">典型場景</td><td>客服、法律檢索、企業查詢</td><td class="wiki-cell">研究專題、讀一本書、課程筆記</td></tr>
+      </table>
+
+      <p class="sweet">一個題目、數十篇 paper、答案需要<b>串起五篇研究而不是查一篇</b>——醫學文獻回顧完全落在 LLM Wiki 這一側。</p>
+    </div>
+
+    <div>
+      <div class="tree">
+        <div class="h">MED-BRAIN／WIKI 目錄結構</div>
+<div>wiki/</div>
+<div>├── <span class="dir">sources/</span>          <span class="dim2"># 每篇 paper 一頁摘要</span></div>
+<div>│&nbsp;&nbsp;&nbsp;└── adaptt2d-2026.md</div>
+<div>├── <span class="dir">entities/</span>         <span class="dim2"># 實體頁</span></div>
+<div>│&nbsp;&nbsp;&nbsp;├── diseases/t2dm.md</div>
+<div>│&nbsp;&nbsp;&nbsp;├── drugs/glp1-ra.md</div>
+<div>│&nbsp;&nbsp;&nbsp;└── trials/ukpds.md</div>
+<div>├── <span class="dir">syntheses/</span>        <span class="dim2"># 跨研究的演進論點</span></div>
+<div>│&nbsp;&nbsp;&nbsp;└── glp1-cv-outcome.md</div>
+<div>├── index.md          <span class="dim2"># 內容目錄</span></div>
+<div>└── log.md            <span class="dim2"># 時間軸</span></div>
+      </div>
+
+      <div class="caveat">
+        <h3>⚠ 醫學使用的最大風險</h3>
+        <p>LLM 壓縮來源時，<b>一個誤解會沿著連結悄悄擴散到整個 wiki</b>——RAG 錯一次只錯一個答案，wiki 錯一次會被當成「事實」沉澱下來。<br>所以 <b>lint 不是選配</b>：定期抽查 wiki 頁面對回 raw 原文，數字與劑量尤其要逐一驗證。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>打地基</span><span>08 / 22</span></div>
+</body>
+</html>
